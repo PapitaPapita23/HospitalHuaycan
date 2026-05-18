@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import React from "react";
 import LoginForm from "../components/LoginForm";
 import bgImage from "../assets/Login.png";

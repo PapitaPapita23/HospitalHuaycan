@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import RecoverPasswordForm from "../components/RecoverPasswordForm"
 import bgImage from "../assets/Login.png";
 import type React from "react";

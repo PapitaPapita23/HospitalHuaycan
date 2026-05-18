@@ -217,6 +217,47 @@ Nota: actualmente las rutas internas están disponibles por enrutamiento directo
 
 ```json
 {
+
+## Despliegue en Vercel
+
+Este proyecto ya está preparado para Vercel.
+
+### Archivos clave
+
+- `vercel.json`: incluye rewrite para SPA y evita 404 al recargar rutas como `/home` o `/settings`.
+
+Contenido aplicado:
+
+```json
+{
+	"$schema": "https://openapi.vercel.sh/vercel.json",
+	"rewrites": [
+		{
+			"source": "/(.*)",
+			"destination": "/index.html"
+		}
+	]
+}
+```
+
+### Configuración recomendada en Vercel
+
+- Framework Preset: Vite
+- Build Command: `npm run build`
+- Output Directory: `dist`
+- Install Command: `npm install`
+
+### Flujo de despliegue
+
+1. Subir el repositorio a GitHub.
+2. Importar el repo en Vercel.
+3. Verificar que Vercel detecte Vite.
+4. Deploy.
+
+### Verificación post-deploy
+
+- Abrir rutas directas como `/home` y `/calendar` para confirmar que no hay 404.
+- Validar que login y recuperación carguen assets correctamente.
 	"dev": "vite",
 	"build": "vite build",
 	"lint": "eslint .",

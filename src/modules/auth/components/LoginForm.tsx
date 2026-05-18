@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import React, { useState, useContext } from "react";
 import LoginInput from "./LoginInput";
 import LoginButton from "./LoginButton";
