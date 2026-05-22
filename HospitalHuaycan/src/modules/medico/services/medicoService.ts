@@ -2,7 +2,7 @@ import { supabase } from "../../../lib/supabase";
 import { CitaMedico } from "../types";
 
 export async function getAgendaHoy(): Promise<CitaMedico[]> {
-  const userId = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
   if (!userId) throw new Error("Sesión no iniciada");
 
   const { data, error } = await supabase.rpc("get_agenda_medico_hoy", {

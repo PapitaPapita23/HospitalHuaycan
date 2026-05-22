@@ -33,6 +33,20 @@ public class JwtUtils {
 
         return Jwts.builder()
                 .subject(userPrincipal.getUsername())
+                .claim("userId", userPrincipal.getId())
+                .claim("rol", userPrincipal.getAuthorities().stream()
+                        .findFirst().map(a -> a.getAuthority()).orElse("ROLE_USER"))
+                .issuedAt(new Date())
+                .expiration(new Date((new Date()).getTime() + jwtExpirationMs))
+                .signWith(getSigningKey())
+                .compact();
+    }
+
+    public String generateJwtToken(Long userId, String username, String rol) {
+        return Jwts.builder()
+                .subject(username)
+                .claim("userId", userId)
+                .claim("rol", rol)
                 .issuedAt(new Date())
                 .expiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(getSigningKey())
@@ -46,6 +60,24 @@ public class JwtUtils {
                 .parseSignedClaims(token)
                 .getPayload()
                 .getSubject();
+    }
+
+    public Long getIdFromJwtToken(String token) {
+        return Jwts.parser()
+                .verifyWith(getSigningKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .get("userId", Long.class);
+    }
+
+    public String getRolFromJwtToken(String token) {
+        return Jwts.parser()
+                .verifyWith(getSigningKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload()
+                .get("rol", String.class);
     }
 
     public boolean validateJwtToken(String authToken) {

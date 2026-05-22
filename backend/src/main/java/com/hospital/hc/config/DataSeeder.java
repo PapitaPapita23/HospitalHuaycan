@@ -36,7 +36,8 @@ public class DataSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // Sembrar Roles si no existen
+        try {
+            // Sembrar Roles si no existen
         createRolIfNotExists("ROLE_ADMINISTRADOR", "Rol de Administrador del Sistema");
         createRolIfNotExists("ROLE_ADMISION", "Rol para personal de admisión hospitalaria");
         createRolIfNotExists("ROLE_ARCHIVO", "Rol para personal de archivo médico");
@@ -69,6 +70,9 @@ public class DataSeeder implements CommandLineRunner {
         createMedicoIfNotExists("Dr. Fernando Soto", "CMP-36985", "20000007", "medico_soto", "Oftalmología");
         createMedicoIfNotExists("Dra. Carmen Luna", "CMP-14785", "20000008", "medico_luna", "Traumatología");
         createMedicoIfNotExists("Dr. Gabriel Ortiz", "CMP-25896", "20000009", "medico_ortiz", "Odontología");
+        } catch (Exception e) {
+            System.out.println(">>> [DataSeeder] BD local no disponible, omitiendo seed: " + e.getMessage());
+        }
     }
 
     private void createRolIfNotExists(String nombreRol, String descripcion) {

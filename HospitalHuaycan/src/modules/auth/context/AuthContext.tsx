@@ -1,5 +1,5 @@
 import React, { createContext, useMemo, useState, useEffect } from 'react'
-import { supabase } from '../../../lib/supabase'
+import { apiPost } from '../../../lib/apiClient'
 
 export type UserRole = string | null
 
@@ -40,18 +40,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       throw new Error('Credenciales incompletas')
     }
 
-    const { data, error } = await supabase.rpc('login_usuario', {
-      p_username: username,
-      p_password: password,
-    })
+    const data = await apiPost<{
+      token: string
+      userId: number
+      username: string
+      nombreCompleto: string
+      rol: string
+    }>('/auth/login', { username, password })
 
-    if (error) {
-      throw new Error('Credenciales inválidas')
-    }
-
-    localStorage.setItem('token', String(data.id))
+    localStorage.setItem('token', data.token)
+    localStorage.setItem('userId', String(data.userId))
     localStorage.setItem('rol', data.rol)
-    localStorage.setItem('nombreCompleto', data.nombre_completo)
+    localStorage.setItem('nombreCompleto', data.nombreCompleto)
 
     setIsAuthenticated(true)
     setUserRoleState(data.rol)
@@ -59,6 +59,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const handleLogout = () => {
     localStorage.removeItem('token')
+    localStorage.removeItem('userId')
     localStorage.removeItem('rol')
     localStorage.removeItem('nombreCompleto')
     setIsAuthenticated(false)

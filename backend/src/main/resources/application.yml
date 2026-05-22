@@ -3,21 +3,30 @@ spring:
     url: jdbc:postgresql://localhost:5432/hospital_hc
     username: postgres
     password: root
-    driver-class-name: org.postgresql.Driver
+    hikari:
+      initialization-fail-timeout: 0
   jpa:
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      ddl-auto: none
+    show-sql: false
     properties:
       hibernate:
-        hbm2ddl.create_namespaces: true
+        boot:
+          allow_jdbc_metadata_access: false
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
         jdbc:
           lob:
             non_contextual_creation: true
 server:
   port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      force-response: true
+
+supabase:
+  url: https://maptsdpqsyuvmmqhnofv.supabase.co
+  anon-key: sb_publishable_uNq2BzI3BE-UdwKLIYx7rg_PDF1uUST
 
 apiperu:
   url: https://apiperu.dev/api/dni
