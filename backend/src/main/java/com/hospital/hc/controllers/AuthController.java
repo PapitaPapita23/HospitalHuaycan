@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "*", maxAge = 3600)
 public class AuthController {
 
     @Autowired
@@ -26,6 +25,10 @@ public class AuthController {
         } catch (AuthenticationException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body("Error: Credenciales inválidas. " + e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error interno en el servidor: " + e.getMessage() + " [Tipo: " + e.getClass().getName() + "]");
         }
     }
 }

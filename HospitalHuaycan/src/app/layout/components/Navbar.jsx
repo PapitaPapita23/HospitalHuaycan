@@ -1,8 +1,19 @@
 import { Link, useLocation } from 'react-router-dom'
+import { useContext } from 'react'
+import { AuthContext } from '../../../modules/auth/context/AuthContext'
 import { navItems } from './navItems'
 
 export default function Navbar() {
   const location = useLocation()
+  const { userRole } = useContext(AuthContext)
+
+  const filteredNavItems = navItems.filter((item) => {
+    if (item.to === '/admision' && userRole !== 'ROLE_ADMISION') return false
+    if (item.to === '/medico' && userRole !== 'ROLE_MEDICO') return false
+    if (item.to === '/triaje' && userRole !== 'ROLE_ENFERMERIA') return false
+    if (item.to === '/archivo' && userRole !== 'ROLE_ARCHIVO') return false
+    return true
+  })
 
   return (
     <nav className="fixed z-10 hidden h-[80%] flex-col items-center justify-center bg-transparent sm:flex xl-custom:py-12">
@@ -15,7 +26,7 @@ export default function Navbar() {
 
       <div className="hidden w-16 space-y-8 rounded-br-[33px] rounded-tr-[33px] bg-[#CA0000] px-2 py-2 sm:flex sm:px-2 lg:px-2">
         <div className="flex h-auto w-full flex-col items-center justify-between py-2">
-          {navItems.map((item) => {
+          {filteredNavItems.map((item) => {
             const Icon = item.icon
             return (
               <div className="group relative sm:flex sm:flex-col" key={item.to}>

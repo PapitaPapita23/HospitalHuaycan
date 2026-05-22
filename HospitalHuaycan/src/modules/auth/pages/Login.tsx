@@ -1,9 +1,24 @@
 /// <reference types="vite/client" />
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
 import LoginForm from "../components/LoginForm";
 import bgImage from "../assets/Login.png";
 
 const Login: React.FC = () => {
+  const { isAuthenticated, userRole } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated && userRole) {
+      if (userRole === "ROLE_ADMISION") navigate("/admision", { replace: true });
+      else if (userRole === "ROLE_MEDICO") navigate("/medico", { replace: true });
+      else if (userRole === "ROLE_ENFERMERIA") navigate("/triaje", { replace: true });
+      else if (userRole === "ROLE_ARCHIVO") navigate("/archivo", { replace: true });
+      else navigate("/home", { replace: true });
+    }
+  }, [isAuthenticated, userRole, navigate]);
+
   return (
     <div
       className="min-h-screen bg-cover bg-center"
