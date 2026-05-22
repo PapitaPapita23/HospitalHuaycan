@@ -15,7 +15,9 @@ export function useTicket(ticket: CitaResponseDTO) {
     []
   );
 
-  const pacienteNombreCompleto = `${ticket.paciente.nombre} ${ticket.paciente.apellidos}`;
+  const pacienteNombreCompleto = ticket.paciente
+    ? `${ticket.paciente.nombre || ""} ${ticket.paciente.apellidos || ""}`.trim()
+    : "Paciente Sin Nombre";
 
   const handlePrint = () => window.print();
 

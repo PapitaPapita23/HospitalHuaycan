@@ -12,11 +12,11 @@ export default function PlatformLayout() {
   }
 
   return (
-    <div className="min-h-screen bg-[#ECF4FC]">
+    <div className="min-h-screen bg-[#ECF4FC] print:bg-white print:min-h-0">
       <Header />
       <Navbar />
-      <main className="px-2 pb-4 pt-[84px] sm:pl-[64px] sm:pr-3 sm:pt-[90px] ml-4">
-        <div className="min-h-[calc(100vh-106px)] rounded-[20px]">
+      <main className="px-2 pb-4 pt-[84px] sm:pl-[64px] sm:pr-3 sm:pt-[90px] ml-4 print:p-0 print:m-0 print:pt-0 print:w-full">
+        <div className="min-h-[calc(100vh-106px)] rounded-[20px] print:min-h-0">
           <Outlet />
         </div>
       </main>

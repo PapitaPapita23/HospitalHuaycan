@@ -46,7 +46,7 @@ const AdmisionDashboard: React.FC = () => {
   if (activeFlow === "agendar") {
     return (
       <div className="space-y-6">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between print:hidden">
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#CA0000] mb-1">
               Admisión · Registro

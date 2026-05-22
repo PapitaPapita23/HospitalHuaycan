@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/hospital_utp?currentSchema=hospital_hc
-    username: postgres
-    password: ROOT
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/hospital_utp?currentSchema=hospital_hc}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:ROOT}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

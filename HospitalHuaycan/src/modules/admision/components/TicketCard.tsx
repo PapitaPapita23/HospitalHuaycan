@@ -37,7 +37,7 @@ const TicketCard: React.FC<TicketCardProps> = ({ ticket, pacienteNombreCompleto,
         <div>
           <span className="text-xs text-slate-400 uppercase font-semibold block">Paciente</span>
           <span className="text-sm font-bold text-slate-800">{pacienteNombreCompleto}</span>
-          <span className="text-xs text-slate-500 block">DNI: {ticket.paciente.dni}</span>
+          <span className="text-xs text-slate-500 block">DNI: {ticket.paciente?.dni || "N/A"}</span>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
@@ -79,7 +79,7 @@ const TicketCard: React.FC<TicketCardProps> = ({ ticket, pacienteNombreCompleto,
           ))}
         </div>
         <span className="text-[10px] font-mono tracking-widest text-slate-400">
-          *HHC-{ticket.paciente.dni}-{ticket.numero_ticket}*
+          *HHC-{ticket.paciente?.dni || "N/A"}-{ticket.numero_ticket}*
         </span>
       </div>
 

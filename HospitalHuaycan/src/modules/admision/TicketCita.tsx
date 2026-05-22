@@ -14,7 +14,7 @@ const TicketCita: React.FC<TicketCitaProps> = ({ ticket, onClose }) => {
   const { fechaRegistro, pacienteNombreCompleto, handlePrint } = useTicket(ticket);
 
   return (
-    <div className="flex flex-col items-center justify-center p-4 py-8 animate-fadeIn">
+    <div className="flex flex-col items-center justify-center p-4 py-8 animate-fadeIn print:p-0 print:py-0">
       <TicketSuccessHeader />
       <TicketCard
         ticket={ticket}

@@ -22,7 +22,7 @@ export default function Header() {
   }, [])
 
   return (
-    <header className="fixed top-0 z-20 h-[88px] w-full bg-[#ECF4FC] px-4 sm:px-6">
+    <header className="fixed top-0 z-20 h-[88px] w-full bg-[#ECF4FC] px-4 sm:px-6 print:hidden">
       <div className="flex h-full items-center justify-between">
         <img
           src={ministerioLogo}
