@@ -16,7 +16,7 @@ export default function PlatformLayout() {
       <Header />
       <Navbar />
       <main className="px-2 pb-4 pt-[84px] sm:pl-[64px] sm:pr-3 sm:pt-[90px] ml-4">
-        <div className="min-h-[calc(100vh-106px)] rounded-[20px] bg-white p-6">
+        <div className="min-h-[calc(100vh-106px)] rounded-[20px]">
           <Outlet />
         </div>
       </main>
