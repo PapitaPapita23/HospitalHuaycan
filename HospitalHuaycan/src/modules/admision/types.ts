@@ -9,16 +9,16 @@ export interface CitaRequestDTO {
   paciente_id: number;
   medico_id: number;
   especialidad_id: number;
-  fecha_cita: string; // Formato YYYY-MM-DD
-  turno: 'MANANA' | 'TARDE';
+  fecha_cita: string;
+  turno: "MANANA" | "TARDE";
 }
 
 export interface CitaResponseDTO {
   paciente: PacienteDTO;
   medico: string;
   especialidad: string;
-  fecha_cita: string; // Formato YYYY-MM-DD
-  turno: 'MANANA' | 'TARDE';
+  fecha_cita: string;
+  turno: "MANANA" | "TARDE";
   numero_ticket: string;
 }
 
@@ -33,4 +33,22 @@ export interface Especialidad {
 export interface Medico {
   id: number;
   nombreCompleto: string;
+}
+
+export interface PatientState {
+  id: number;
+  dni: string;
+  nombreCompleto: string;
+  isNew?: boolean;
+}
+
+export interface AppointmentItem {
+  id: string;
+  paciente: string;
+  dni: string;
+  especialidad: string;
+  medico: string;
+  turno: "MANANA" | "TARDE";
+  fecha: string;
+  estado: "CONFIRMADA" | "ATENDIDA" | "CANCELADA";
 }
