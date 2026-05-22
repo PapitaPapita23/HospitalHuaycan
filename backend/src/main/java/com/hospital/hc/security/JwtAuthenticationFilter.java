@@ -33,7 +33,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         try {
             String jwt = parseJwt(request);
-            if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
+            if (jwt == null) {
+                response.addHeader("X-Jwt-Status", "Null");
+            } else if (!jwtUtils.validateJwtToken(jwt)) {
+                response.addHeader("X-Jwt-Status", "Invalid");
+            } else {
+                response.addHeader("X-Jwt-Status", "Valid");
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
 
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);

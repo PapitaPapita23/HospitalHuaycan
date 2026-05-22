@@ -31,4 +31,9 @@ public class AuthController {
                     .body("Error interno en el servidor: " + e.getMessage() + " [Tipo: " + e.getClass().getName() + "]");
         }
     }
+    
+    @GetMapping("/ping")
+    public ResponseEntity<String> ping() {
+        return ResponseEntity.ok("pong");
+    }
 }
