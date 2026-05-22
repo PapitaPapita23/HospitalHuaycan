@@ -1,3 +1,9 @@
 {
-    "java.compile.nullAnalysis.mode": "automatic"
+    "java.compile.nullAnalysis.mode": "automatic",
+    "chat.tools.terminal.autoApprove": {
+        "/^Push-Location \"C:\\\\Users\\\\sebas\\\\HospitalHuaycan\\\\HospitalHuaycan\" ; node -e \"\nimport\\('@supabase/supabase-js'\\)\\.then\\(\\(\\{ createClient \\}\\) => \\{\n  const client = createClient\\(\n    'https://oiknjdypftpercxsvzkf\\.supabase\\.co',\n    'sb_publishable_0QyWUGqqAPbaRF544pns_Q_0OPin9lN'\n  \\);\n  client\\.rpc\\('login_usuario', \\{ p_username: 'admision1', p_password: '123456' \\}\\)\\.then\\(\\(\\{ data, error \\}\\) => \\{\n    if \\(error\\) console\\.error\\('ERROR:', JSON\\.stringify\\(error\\)\\);\n    else console\\.log\\('OK:', JSON\\.stringify\\(data\\)\\);\n  \\}\\);\n\\}\\);\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
 }
