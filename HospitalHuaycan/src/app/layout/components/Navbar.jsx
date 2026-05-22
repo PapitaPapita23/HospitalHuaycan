@@ -16,7 +16,7 @@ export default function Navbar() {
   })
 
   return (
-    <nav className="fixed z-10 hidden h-[80%] flex-col items-center justify-center bg-transparent sm:flex xl-custom:py-12">
+    <nav className="mt-20 fixed z-10 hidden h-[80%] flex-col items-center justify-center bg-transparent sm:flex xl-custom:py-12">
       <div className="relative h-8 w-full rounded-tr-[100%] bg-[#CA0000]">
         <div
           className="h-8 bg-[#ECF4FC]"

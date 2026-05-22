@@ -1,14 +1,9 @@
 import React, { useState } from "react";
 import GenerarCitaFlujo from "./GenerarCitaFlujo";
-import { 
-  IoCalendarOutline, 
-  IoPeopleOutline, 
-  IoTimeOutline, 
-  IoAddCircleOutline, 
-  IoSearchOutline, 
-  IoDocumentTextOutline,
-  IoPrintOutline,
-  IoAlertCircleOutline
+import {
+  IoSunnyOutline,
+  IoMoonOutline,
+  IoPersonAddOutline,
 } from "react-icons/io5";
 
 interface AppointmentItem {
@@ -83,152 +78,211 @@ const AdmisionDashboard: React.FC = () => {
   }
 
   return (
-    <div className="space-y-8 animate-fadeIn">
-      {/* Encabezado del Dashboard */}
-      <div className="flex items-center justify-between">
+    <div className="space-y-5">
+
+      {/* ── HEADER ── */}
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-[#0A1733]">Módulo de Admisión</h2>
-          <p className="text-sm text-slate-500">Panel de administración para registrar y controlar el flujo de citas médicas.</p>
+          <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#CA0000] mb-1">
+            {new Date().toLocaleDateString("es-PE", { weekday: "long", day: "numeric", month: "long" })}
+          </p>
+          <h2 className="text-[2rem] font-black text-[#0A1733] leading-none tracking-tight">
+            Admisión
+          </h2>
         </div>
         <button
           onClick={() => setActiveFlow("agendar")}
-          className="flex items-center gap-2 py-3 px-5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl shadow-lg shadow-blue-600/15 hover:shadow-blue-600/25 transition-all duration-300 active:scale-[0.98] cursor-pointer"
+          className="self-start sm:self-auto flex items-center gap-2 py-2.5 px-5 bg-[#CA0000] hover:bg-[#a80000] active:scale-95 text-white text-sm font-bold rounded-xl transition-all duration-150 shadow-sm"
         >
-          <IoAddCircleOutline className="w-5.5 h-5.5" />
-          Agendar Nueva Cita
+          <span className="text-base leading-none">+</span>
+          Nueva Cita
         </button>
       </div>
 
-      {/* Estadísticas de Hoy */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-white border border-slate-100 p-5 rounded-2xl shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center">
-            <IoCalendarOutline className="w-6 h-6" />
-          </div>
-          <div>
-            <span className="text-xs text-slate-400 font-semibold block">Citas de Hoy</span>
-            <span className="text-2xl font-bold text-slate-800">24</span>
+      {/* ── BENTO STATS ── */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+
+        {/* Hero card — ocupa 2 cols en todos los tamaños */}
+        <div className="col-span-2 bg-[#0A1733] rounded-2xl p-5 relative overflow-hidden flex flex-col justify-between min-h-[140px]">
+          {/* Decoración */}
+          <div className="absolute -right-6 -top-6 w-28 h-28 rounded-full bg-white/[0.04]" />
+          <div className="absolute right-5 bottom-5 w-14 h-14 rounded-full bg-[#CA0000]/25" />
+
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 z-10">
+            Total citas · hoy
+          </p>
+          <div className="z-10">
+            <p className="text-[3.5rem] font-black text-white leading-none">24</p>
+            {/* Barra mañana / tarde */}
+            <div className="mt-3">
+              <div className="flex justify-between text-[10px] text-white/40 font-semibold mb-1.5">
+                <span>Mañana · 14</span>
+                <span>Tarde · 10</span>
+              </div>
+              <div className="h-1 bg-white/10 rounded-full overflow-hidden">
+                <div className="h-full bg-white/50 rounded-full transition-all" style={{ width: "58%" }} />
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="bg-white border border-slate-100 p-5 rounded-2xl shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 bg-amber-50 text-amber-600 rounded-xl flex items-center justify-center">
-            <IoTimeOutline className="w-6 h-6" />
-          </div>
+        {/* Turno Mañana */}
+        <div className="bg-white border border-slate-100 rounded-2xl p-4 flex flex-col justify-between min-h-[140px]">
+          <IoSunnyOutline className="w-5 h-5 text-amber-400" />
           <div>
-            <span className="text-xs text-slate-400 font-semibold block">Turno Mañana</span>
-            <span className="text-2xl font-bold text-slate-800">14</span>
+            <p className="text-[2.4rem] font-black text-[#0A1733] leading-none">14</p>
+            <p className="text-[11px] text-slate-400 font-semibold mt-1">Turno Mañana</p>
           </div>
         </div>
 
-        <div className="bg-white border border-slate-100 p-5 rounded-2xl shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center">
-            <IoTimeOutline className="w-6 h-6" />
-          </div>
+        {/* Turno Tarde */}
+        <div className="bg-white border border-slate-100 rounded-2xl p-4 flex flex-col justify-between min-h-[140px]">
+          <IoMoonOutline className="w-5 h-5 text-indigo-300" />
           <div>
-            <span className="text-xs text-slate-400 font-semibold block">Turno Tarde</span>
-            <span className="text-2xl font-bold text-slate-800">10</span>
+            <p className="text-[2.4rem] font-black text-[#0A1733] leading-none">10</p>
+            <p className="text-[11px] text-slate-400 font-semibold mt-1">Turno Tarde</p>
           </div>
         </div>
 
-        <div className="bg-white border border-slate-100 p-5 rounded-2xl shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center">
-            <IoPeopleOutline className="w-6 h-6" />
-          </div>
-          <div>
-            <span className="text-xs text-slate-400 font-semibold block">Nuevos Pacientes</span>
-            <span className="text-2xl font-bold text-slate-800">6</span>
-          </div>
-        </div>
       </div>
 
-      {/* Tarjetas de Acciones Rápidas */}
-      <div>
-        <h3 className="text-lg font-bold text-[#0A1733] mb-4">Acciones Rápidas</h3>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          
-          <div 
-            onClick={() => setActiveFlow("agendar")}
-            className="group cursor-pointer bg-white border border-slate-100 hover:border-blue-500/30 p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex items-start gap-4"
-          >
-            <div className="w-10 h-10 bg-blue-50 group-hover:bg-blue-600 text-blue-600 group-hover:text-white rounded-lg flex items-center justify-center transition-colors">
-              <IoAddCircleOutline className="w-6 h-6" />
-            </div>
-            <div>
-              <h4 className="font-bold text-[#0A1733] text-sm group-hover:text-blue-600 transition-colors">Agendar Cita</h4>
-              <p className="text-xs text-slate-500 mt-1">Busque pacientes e ingrese citas de forma automatizada y rápida.</p>
-            </div>
-          </div>
+      {/* ── ACCIONES + NUEVOS PACIENTES ── */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
 
-          <div className="group cursor-pointer bg-white border border-slate-100 hover:border-blue-500/30 p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex items-start gap-4">
-            <div className="w-10 h-10 bg-slate-50 group-hover:bg-blue-600 text-slate-500 group-hover:text-white rounded-lg flex items-center justify-center transition-colors">
-              <IoSearchOutline className="w-5 h-5" />
-            </div>
-            <div>
-              <h4 className="font-bold text-[#0A1733] text-sm group-hover:text-blue-600 transition-colors">Consultar Pacientes</h4>
-              <p className="text-xs text-slate-500 mt-1">Búsqueda rápida en el padrón electoral y del hospital por DNI o apellidos.</p>
-            </div>
+        {/* Lista de acciones numeradas */}
+        <div className="md:col-span-2 bg-white border border-slate-100 rounded-2xl overflow-hidden">
+          <div className="px-6 pt-5 pb-3">
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+              Acciones rápidas
+            </p>
           </div>
-
-          <div className="group cursor-pointer bg-white border border-slate-100 hover:border-blue-500/30 p-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 flex items-start gap-4">
-            <div className="w-10 h-10 bg-slate-50 group-hover:bg-blue-600 text-slate-500 group-hover:text-white rounded-lg flex items-center justify-center transition-colors">
-              <IoDocumentTextOutline className="w-5 h-5" />
-            </div>
-            <div>
-              <h4 className="font-bold text-[#0A1733] text-sm group-hover:text-blue-600 transition-colors">Reportes de Admisión</h4>
-              <p className="text-xs text-slate-500 mt-1">Reportes diarios de agendas, médicos saturados y turnos libres.</p>
-            </div>
+          <div>
+            {[
+              { n: "01", label: "Agendar Cita Médica",       sub: "Registrar nueva cita para un paciente",          action: () => setActiveFlow("agendar"), active: true },
+              { n: "02", label: "Consultar Paciente por DNI", sub: "Búsqueda en padrón electoral y padrón hospital", action: undefined, active: false },
+              { n: "03", label: "Reportes del Día",           sub: "Agendas, médicos saturados y turnos libres",     action: undefined, active: false },
+            ].map(({ n, label, sub, action, active }) => (
+              <button
+                key={n}
+                onClick={action}
+                className={`w-full group flex items-center gap-4 px-6 py-4 border-t border-slate-100 transition-colors text-left
+                  ${active ? "hover:bg-[#ECF4FC]" : "hover:bg-slate-50/60 opacity-60"}`}
+              >
+                <span className={`text-[11px] font-black tabular-nums w-6 shrink-0 ${active ? "text-[#CA0000]" : "text-slate-300"}`}>
+                  {n}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className={`text-sm font-bold leading-tight ${active ? "text-[#0A1733]" : "text-slate-500"}`}>{label}</p>
+                  <p className="text-[11px] text-slate-400 mt-0.5 truncate">{sub}</p>
+                </div>
+                <span className={`text-xl shrink-0 transition-transform duration-150 ${active ? "group-hover:translate-x-0.5 text-[#CA0000]" : "text-slate-200"}`}>
+                  →
+                </span>
+              </button>
+            ))}
           </div>
-
         </div>
+
+        {/* Nuevos Pacientes */}
+        <div className="bg-[#CA0000] rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden min-h-[180px]">
+          <div className="absolute -right-5 -bottom-5 w-24 h-24 rounded-full bg-white/10" />
+          <div className="absolute right-8 top-6 w-8 h-8 rounded-full bg-white/10" />
+          <IoPersonAddOutline className="w-6 h-6 text-white/60 z-10" />
+          <div className="z-10">
+            <p className="text-[3.5rem] font-black text-white leading-none">6</p>
+            <p className="text-white/70 text-[11px] font-semibold mt-1 uppercase tracking-wide">
+              Nuevos pacientes hoy
+            </p>
+          </div>
+        </div>
+
       </div>
 
-      {/* Citas del Día */}
-      <div className="bg-white border border-slate-100 rounded-2xl shadow-sm overflow-hidden">
-        <div className="p-6 border-b border-slate-100 flex items-center justify-between">
-          <h3 className="text-lg font-bold text-[#0A1733]">Registro de Citas Recientes</h3>
-          <span className="text-xs text-slate-400 font-semibold">Visualización de las últimas citas registradas</span>
+      {/* ── TABLA DE CITAS ── */}
+      <div className="bg-white border border-slate-100 rounded-2xl overflow-hidden">
+        <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+          <div>
+            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-0.5">
+              Registro de citas
+            </p>
+            <h3 className="text-base font-black text-[#0A1733] leading-tight">Recientes</h3>
+          </div>
+          <span className="text-[11px] font-bold text-slate-300 bg-slate-100 px-2.5 py-1 rounded-lg">
+            {appointments.length} entradas
+          </span>
         </div>
-        
+
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-sm text-slate-600">
-            <thead className="bg-slate-50 text-[11px] font-bold uppercase tracking-wider text-slate-400">
-              <tr>
-                <th className="px-6 py-3.5">Ticket</th>
-                <th className="px-6 py-3.5">Paciente</th>
-                <th className="px-6 py-3.5">Especialidad</th>
-                <th className="px-6 py-3.5">Médico</th>
-                <th className="px-6 py-3.5">Fecha / Turno</th>
-                <th className="px-6 py-3.5 text-center">Estado</th>
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="text-[10px] font-black uppercase tracking-[0.15em] text-slate-400 border-b border-slate-100">
+                <th className="px-6 py-3 text-left font-black">Ticket</th>
+                <th className="px-6 py-3 text-left font-black">Paciente</th>
+                <th className="px-6 py-3 text-left font-black hidden md:table-cell">Especialidad</th>
+                <th className="px-6 py-3 text-left font-black hidden lg:table-cell">Médico</th>
+                <th className="px-6 py-3 text-left font-black">Turno</th>
+                <th className="px-6 py-3 text-left font-black">Estado</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody>
               {appointments.map((apt) => (
-                <tr key={apt.id} className="hover:bg-slate-50/50 transition-colors">
-                  <td className="px-6 py-4 font-semibold text-slate-700">{apt.id}</td>
+                <tr
+                  key={apt.id}
+                  className="border-b border-slate-100 last:border-0 hover:bg-slate-50/50 transition-colors"
+                >
+                  {/* Ticket */}
                   <td className="px-6 py-4">
-                    <span className="font-semibold text-slate-800 block">{apt.paciente}</span>
-                    <span className="text-xs text-slate-400">DNI: {apt.dni}</span>
-                  </td>
-                  <td className="px-6 py-4">{apt.especialidad}</td>
-                  <td className="px-6 py-4">{apt.medico}</td>
-                  <td className="px-6 py-4">
-                    <span className="block font-medium text-slate-700">
-                      {new Date(apt.fecha + "T00:00:00").toLocaleDateString("es-PE", {
-                        day: "2-digit",
-                        month: "2-digit",
-                        year: "numeric"
-                      })}
+                    <span className="font-mono text-[11px] font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded">
+                      {apt.id}
                     </span>
-                    <span className="text-[10px] text-slate-400 font-semibold uppercase">{apt.turno === "MANANA" ? "Mañana" : "Tarde"}</span>
                   </td>
-                  <td className="px-6 py-4 text-center">
-                    <span className={`inline-flex px-2.5 py-0.5 rounded-full text-xs font-semibold ${
-                      apt.estado === "ATENDIDA" 
-                        ? "bg-slate-100 text-slate-600" 
+
+                  {/* Paciente con avatar de iniciales */}
+                  <td className="px-6 py-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-full bg-[#ECF4FC] flex items-center justify-center shrink-0">
+                        <span className="text-[9px] font-black text-[#0A1733]">
+                          {apt.paciente.split(" ").slice(0, 2).map((n) => n[0]).join("")}
+                        </span>
+                      </div>
+                      <div className="min-w-0">
+                        <p className="font-semibold text-[#0A1733] text-sm leading-tight truncate">
+                          {apt.paciente}
+                        </p>
+                        <p className="text-[10px] text-slate-400">{apt.dni}</p>
+                      </div>
+                    </div>
+                  </td>
+
+                  {/* Especialidad */}
+                  <td className="px-6 py-4 text-slate-500 text-sm hidden md:table-cell">
+                    {apt.especialidad}
+                  </td>
+
+                  {/* Médico */}
+                  <td className="px-6 py-4 text-slate-500 text-sm hidden lg:table-cell">
+                    {apt.medico}
+                  </td>
+
+                  {/* Turno */}
+                  <td className="px-6 py-4">
+                    <span className={`inline-flex text-[10px] font-black uppercase tracking-wide px-2 py-0.5 rounded-md ${
+                      apt.turno === "MANANA"
+                        ? "bg-amber-50 text-amber-600"
+                        : "bg-[#0A1733]/8 text-[#0A1733]"
+                    }`}>
+                      {apt.turno === "MANANA" ? "Mañana" : "Tarde"}
+                    </span>
+                  </td>
+
+                  {/* Estado */}
+                  <td className="px-6 py-4">
+                    <span className={`inline-flex text-[10px] font-black uppercase tracking-wide px-2 py-0.5 rounded-md ${
+                      apt.estado === "ATENDIDA"
+                        ? "bg-slate-100 text-slate-400"
                         : apt.estado === "CANCELADA"
-                        ? "bg-red-50 text-red-600"
-                        : "bg-emerald-50 text-emerald-600"
+                        ? "bg-[#CA0000]/10 text-[#CA0000]"
+                        : "bg-[#0A1733]/8 text-[#0A1733]"
                     }`}>
                       {apt.estado === "ATENDIDA" ? "Atendido" : apt.estado === "CANCELADA" ? "Cancelado" : "Confirmada"}
                     </span>
@@ -239,6 +293,7 @@ const AdmisionDashboard: React.FC = () => {
           </table>
         </div>
       </div>
+
     </div>
   );
 };
