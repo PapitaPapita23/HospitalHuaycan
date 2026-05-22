@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/hospital_utp?currentSchema=hospital_hc
+    url: jdbc:postgresql://localhost:5432/hospital_hc
     username: postgres
-    password: ROOT
+    password: root
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -10,6 +10,7 @@ spring:
     show-sql: true
     properties:
       hibernate:
+        hbm2ddl.create_namespaces: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
         jdbc:

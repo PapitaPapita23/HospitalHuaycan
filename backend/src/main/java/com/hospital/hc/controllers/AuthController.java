@@ -28,4 +28,9 @@ public class AuthController {
                     .body("Error: Credenciales inválidas. " + e.getMessage());
         }
     }
+    
+    @GetMapping("/ping")
+    public ResponseEntity<String> ping() {
+        return ResponseEntity.ok("pong");
+    }
 }

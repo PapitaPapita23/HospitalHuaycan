@@ -10,4 +10,6 @@ import java.util.List;
 public interface CitaMedicaRepository extends JpaRepository<CitaMedica, Long> {
     List<CitaMedica> findByPacienteId(Long pacienteId);
     List<CitaMedica> findByMedicoIdAndFechaCita(Integer medicoId, LocalDate fechaCita);
+    boolean existsByNumeroTicket(String numeroTicket);
+    List<CitaMedica> findByMedicoIdAndFechaCitaOrderByHoraCitaAsc(Integer medicoId, LocalDate fechaCita);
 }
