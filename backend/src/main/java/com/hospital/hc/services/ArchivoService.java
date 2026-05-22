@@ -11,7 +11,10 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Optional;
 
+import org.springframework.transaction.annotation.Transactional;
+
 @Service
+@Transactional(readOnly = true)
 public class ArchivoService {
 
     @Autowired

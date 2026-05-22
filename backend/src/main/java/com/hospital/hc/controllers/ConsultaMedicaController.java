@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/consultas")
-@CrossOrigin(origins = "*")
 public class ConsultaMedicaController {
 
     @Autowired

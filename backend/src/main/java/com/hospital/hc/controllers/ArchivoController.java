@@ -10,7 +10,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/archivo")
-@CrossOrigin(origins = "*")
 public class ArchivoController {
 
     @Autowired
