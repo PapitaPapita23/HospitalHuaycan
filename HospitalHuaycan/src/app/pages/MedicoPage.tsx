@@ -7,25 +7,6 @@ import { useAgendaMedico } from "../../modules/medico/hooks/useAgendaMedico";
 import AgendaTable from "../../modules/medico/components/AgendaTable";
 import HistorialModal from "../../modules/medico/components/HistorialModal";
 
-interface StatCardProps {
-  label: string;
-  value: number;
-  icon: React.ReactNode;
-  accent: string;
-}
-
-const StatCard: React.FC<StatCardProps> = ({ label, value, icon, accent }) => (
-  <div className="bg-white border border-slate-100 rounded-2xl shadow-sm px-5 py-4 flex items-center gap-4">
-    <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${accent}`}>
-      {icon}
-    </div>
-    <div>
-      <p className="text-2xl font-black text-[#0A1733]">{value}</p>
-      <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">{label}</p>
-    </div>
-  </div>
-);
-
 const MedicoPage: React.FC = () => {
   const { agenda, isLoading, error, selected, setSelected, load, pendientes, atendidos, enAtencion } =
     useAgendaMedico();
@@ -33,6 +14,9 @@ const MedicoPage: React.FC = () => {
   const today = new Date().toLocaleDateString("es-PE", {
     weekday: "long", day: "2-digit", month: "long", year: "numeric",
   });
+
+  const total      = agenda.length;
+  const progreso   = total > 0 ? Math.round((atendidos / total) * 100) : 0;
 
   return (
     <div className="space-y-6">
@@ -59,32 +43,51 @@ const MedicoPage: React.FC = () => {
         </button>
       </div>
 
-      {/* ── Stat cards ── */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <StatCard
-          label="Total del día"
-          value={agenda.length}
-          icon={<IoTimeOutline className="w-5 h-5 text-[#0A1733]" />}
-          accent="bg-slate-100"
-        />
-        <StatCard
-          label="En atención"
-          value={enAtencion}
-          icon={<IoEllipseOutline className="w-5 h-5 text-blue-600" />}
-          accent="bg-blue-50"
-        />
-        <StatCard
-          label="Pendientes"
-          value={pendientes}
-          icon={<IoTimeOutline className="w-5 h-5 text-amber-600" />}
-          accent="bg-amber-50"
-        />
-        <StatCard
-          label="Atendidos"
-          value={atendidos}
-          icon={<IoCheckmarkCircleOutline className="w-5 h-5 text-emerald-600" />}
-          accent="bg-emerald-50"
-        />
+      {/* ── Stats grid ── */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+
+        {/* Hero card navy */}
+        <div className="col-span-2 bg-[#0A1733] rounded-2xl p-5 relative overflow-hidden flex flex-col justify-between min-h-[140px]">
+          <div className="absolute -right-6 -top-6 w-28 h-28 rounded-full bg-white/[0.04]" />
+          <div className="absolute right-5 bottom-5 w-14 h-14 rounded-full bg-[#CA0000]/25" />
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 z-10">
+            Total citas · hoy
+          </p>
+          <div className="z-10">
+            <p className="text-[3.5rem] font-black text-white leading-none">{total}</p>
+            <div className="mt-3">
+              <div className="flex justify-between text-[10px] text-white/40 font-semibold mb-1.5">
+                <span>Atendidos · {atendidos}</span>
+                <span>{progreso}%</span>
+              </div>
+              <div className="h-1 bg-white/10 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-white/50 rounded-full transition-all duration-500"
+                  style={{ width: `${progreso}%` }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* En atención */}
+        <div className="bg-white border border-slate-100 rounded-2xl p-4 flex flex-col justify-between min-h-[140px]">
+          <IoEllipseOutline className="w-5 h-5 text-blue-400" />
+          <div>
+            <p className="text-[2.4rem] font-black text-[#0A1733] leading-none">{enAtencion}</p>
+            <p className="text-[11px] text-slate-400 font-semibold mt-1">En atención</p>
+          </div>
+        </div>
+
+        {/* Pendientes */}
+        <div className="bg-white border border-slate-100 rounded-2xl p-4 flex flex-col justify-between min-h-[140px]">
+          <IoTimeOutline className="w-5 h-5 text-amber-400" />
+          <div>
+            <p className="text-[2.4rem] font-black text-[#0A1733] leading-none">{pendientes}</p>
+            <p className="text-[11px] text-slate-400 font-semibold mt-1">Pendientes</p>
+          </div>
+        </div>
+
       </div>
 
       {/* ── Error ── */}
@@ -97,8 +100,16 @@ const MedicoPage: React.FC = () => {
 
       {/* ── Agenda table ── */}
       <div className="bg-white border border-slate-100 rounded-2xl shadow-sm overflow-hidden">
-        <div className="px-6 py-4 border-b border-slate-100">
-          <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Citas programadas</p>
+        <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Citas programadas</p>
+          </div>
+          {atendidos > 0 && (
+            <span className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full">
+              <IoCheckmarkCircleOutline className="w-3.5 h-3.5" />
+              {atendidos} atendido{atendidos > 1 ? "s" : ""}
+            </span>
+          )}
         </div>
         <AgendaTable
           agenda={agenda}

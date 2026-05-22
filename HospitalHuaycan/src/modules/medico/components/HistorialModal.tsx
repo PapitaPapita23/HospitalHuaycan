@@ -1,5 +1,8 @@
-import React, { useState } from "react";
-import { IoCloseOutline, IoChevronDownOutline } from "react-icons/io5";
+﻿import React, { useState } from "react";
+import {
+  IoCloseOutline, IoChevronDownOutline, IoHeartOutline,
+  IoDocumentTextOutline, IoMedkitOutline, IoFlaskOutline,
+} from "react-icons/io5";
 import { CitaMedico, AtencionPasada } from "../types";
 
 interface Props {
@@ -7,45 +10,74 @@ interface Props {
   onClose: () => void;
 }
 
-const VITAL = ({ label, value, unit }: { label: string; value: number | string; unit?: string }) => (
+function toSafeString(val: unknown): string | null {
+  if (val == null) return null;
+  if (typeof val === "string") return val.trim() || null;
+  if (Array.isArray(val)) {
+    const items = val
+      .map((v: unknown) =>
+        typeof v === "object" && v !== null
+          ? Object.values(v as Record<string, unknown>).join(" · ")
+          : String(v)
+      )
+      .filter(Boolean);
+    return items.length ? items.join(" | ") : null;
+  }
+  if (typeof val === "object") return JSON.stringify(val);
+  return String(val);
+}
+
+const Vital = ({ label, value, unit }: { label: string; value: number | string | null | undefined; unit?: string }) => (
   <div className="bg-slate-50 rounded-xl p-3 text-center">
     <p className="text-[9px] font-bold uppercase tracking-widest text-slate-400">{label}</p>
-    <p className="text-base font-black text-[#0A1733] mt-0.5">
-      {value ?? "—"}{unit && <span className="text-xs font-semibold text-slate-400 ml-0.5">{unit}</span>}
+    <p className="text-sm font-black text-[#0A1733] mt-0.5 leading-tight">
+      {value != null ? value : "—"}
+      {unit && value != null && (
+        <span className="text-[10px] font-semibold text-slate-400 ml-0.5">{unit}</span>
+      )}
     </p>
   </div>
 );
 
-const SECTION = ({ title, content }: { title: string; content?: string }) =>
+const Section = ({ title, content, icon }: { title: string; content?: string | null; icon?: React.ReactNode }) =>
   content ? (
     <div>
-      <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">{title}</p>
+      <div className="flex items-center gap-1.5 mb-1.5">
+        {icon}
+        <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">{title}</p>
+      </div>
       <p className="text-sm text-slate-700 leading-relaxed whitespace-pre-line">{content}</p>
     </div>
   ) : null;
 
 function AtencionAccordion({ a, idx }: { a: AtencionPasada; idx: number }) {
   const [open, setOpen] = useState(idx === 0);
+  const secundariosStr = toSafeString(a.diagnosticosSecundarios);
 
   return (
-    <div className="border border-slate-100 rounded-xl overflow-hidden">
+    <div className="border border-slate-100 rounded-2xl overflow-hidden">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-full flex items-center justify-between px-5 py-3.5 bg-slate-50 hover:bg-slate-100 transition-colors"
+        className="w-full flex items-center justify-between px-5 py-4 bg-slate-50 hover:bg-slate-100 transition-colors"
       >
-        <div className="text-left">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Atención</p>
-          <p className="text-sm font-bold text-[#0A1733]">
-            {a.fechaAtencion
-              ? new Date(a.fechaAtencion).toLocaleDateString("es-PE", {
-                  day: "2-digit", month: "long", year: "numeric",
-                })
-              : "Fecha no disponible"}
-          </p>
+        <div className="flex items-center gap-4 text-left">
+          <div className="w-8 h-8 rounded-full bg-[#0A1733] flex items-center justify-center shrink-0">
+            <span className="text-[10px] font-black text-white">{String(idx + 1).padStart(2, "0")}</span>
+          </div>
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Atencion</p>
+            <p className="text-sm font-bold text-[#0A1733]">
+              {a.fechaAtencion
+                ? new Date(a.fechaAtencion).toLocaleDateString("es-PE", {
+                    day: "2-digit", month: "long", year: "numeric",
+                  })
+                : "Fecha no disponible"}
+            </p>
+          </div>
         </div>
         <div className="flex items-center gap-3">
           {a.diagnosticoCie10Principal && (
-            <span className="text-[11px] font-bold bg-[#CA0000]/10 text-[#CA0000] px-2 py-0.5 rounded-full">
+            <span className="text-[11px] font-bold bg-[#CA0000]/10 text-[#CA0000] px-2.5 py-1 rounded-full">
               {a.diagnosticoCie10Principal}
             </span>
           )}
@@ -56,31 +88,30 @@ function AtencionAccordion({ a, idx }: { a: AtencionPasada; idx: number }) {
       </button>
 
       {open && (
-        <div className="px-5 py-5 space-y-5">
-          {/* Signos vitales */}
+        <div className="px-5 py-5 space-y-5 bg-white">
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3">Signos Vitales</p>
-            <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
-              <VITAL label="FR"    value={a.fr}          unit="rpm" />
-              <VITAL label="FC"    value={a.fc}          unit="bpm" />
-              <VITAL label="Temp"  value={a.temperatura} unit="°C" />
-              <VITAL label="PA"    value={`${a.paSistolica}/${a.paDiastolica}`} unit="mmHg" />
-              <VITAL label="SpO₂"  value={a.spo2}        unit="%" />
-              <VITAL label="Peso"  value={a.peso}        unit="kg" />
-              <VITAL label="Talla" value={a.talla}       unit="cm" />
-              <VITAL label="IMC"   value={a.imc} />
+            <div className="flex items-center gap-1.5 mb-3">
+              <IoHeartOutline className="w-3.5 h-3.5 text-[#CA0000]" />
+              <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Signos Vitales</p>
+            </div>
+            <div className="grid grid-cols-4 gap-2">
+              <Vital label="FR"    value={a.fr}          unit="rpm" />
+              <Vital label="FC"    value={a.fc}          unit="bpm" />
+              <Vital label="Temp"  value={a.temperatura} unit="C" />
+              <Vital label="PA"    value={a.paSistolica != null ? `${a.paSistolica}/${a.paDiastolica}` : null} unit="mmHg" />
+              <Vital label="SpO2"  value={a.spo2}        unit="%" />
+              <Vital label="Peso"  value={a.peso}        unit="kg" />
+              <Vital label="Talla" value={a.talla}       unit="cm" />
+              <Vital label="IMC"   value={a.imc} />
             </div>
             {a.escalaDolor != null && (
-              <div className="mt-3 flex items-center gap-3">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Escala de dolor</p>
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400 shrink-0">Escala de dolor</p>
                 <div className="flex gap-1">
                   {Array.from({ length: 10 }, (_, i) => (
                     <div
                       key={i}
-                      className={`w-5 h-5 rounded-full text-[9px] font-black flex items-center justify-center
-                        ${i < a.escalaDolor
-                          ? "bg-[#CA0000] text-white"
-                          : "bg-slate-100 text-slate-400"}`}
+                      className={`w-5 h-5 rounded-full text-[9px] font-black flex items-center justify-center ${i < (a.escalaDolor ?? 0) ? "bg-[#CA0000] text-white" : "bg-slate-100 text-slate-400"}`}
                     >
                       {i + 1}
                     </div>
@@ -90,31 +121,34 @@ function AtencionAccordion({ a, idx }: { a: AtencionPasada; idx: number }) {
             )}
           </div>
 
-          {/* Clínica */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <SECTION title="Anamnesis"    content={a.anamnesis} />
-            <SECTION title="Examen físico" content={a.examenFisico} />
-          </div>
+          {(a.anamnesis || a.examenFisico) && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1 border-t border-slate-50">
+              <Section title="Anamnesis"    content={toSafeString(a.anamnesis)}    icon={<IoDocumentTextOutline className="w-3 h-3 text-slate-400" />} />
+              <Section title="Examen fisico" content={toSafeString(a.examenFisico)} icon={<IoDocumentTextOutline className="w-3 h-3 text-slate-400" />} />
+            </div>
+          )}
 
-          {/* Diagnóstico */}
-          <div className="bg-[#CA0000]/5 border border-[#CA0000]/20 rounded-xl p-4 space-y-2">
-            <p className="text-[10px] font-bold uppercase tracking-widest text-[#CA0000]">Diagnóstico</p>
-            <p className="text-sm font-bold text-[#0A1733]">
-              {a.diagnosticoCie10Principal
-                ? `[${a.diagnosticoCie10Principal}] ${a.diagnosticoDescripcion}`
-                : a.diagnosticoDescripcion ?? "—"}
-            </p>
-            {a.diagnosticosSecundarios && (
-              <p className="text-xs text-slate-500">Secundarios: {a.diagnosticosSecundarios}</p>
-            )}
-          </div>
+          {(a.diagnosticoCie10Principal || a.diagnosticoDescripcion) && (
+            <div className="bg-[#CA0000]/5 border border-[#CA0000]/20 rounded-xl p-4 space-y-1.5">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-[#CA0000]">Diagnostico</p>
+              <p className="text-sm font-bold text-[#0A1733]">
+                {a.diagnosticoCie10Principal
+                  ? `[${a.diagnosticoCie10Principal}] ${a.diagnosticoDescripcion ?? ""}`
+                  : (a.diagnosticoDescripcion ?? "—")}
+              </p>
+              {secundariosStr && (
+                <p className="text-xs text-slate-500">Secundarios: {secundariosStr}</p>
+              )}
+            </div>
+          )}
 
-          {/* Tratamiento */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <SECTION title="Tratamiento"       content={a.tratamiento} />
-            <SECTION title="Indicaciones"      content={a.indicaciones} />
-            <SECTION title="Solicitud exámenes" content={a.solicitudExamenes} />
-          </div>
+          {(a.tratamiento || a.indicaciones || a.solicitudExamenes) && (
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1 border-t border-slate-50">
+              <Section title="Tratamiento"       content={toSafeString(a.tratamiento)}       icon={<IoMedkitOutline        className="w-3 h-3 text-slate-400" />} />
+              <Section title="Indicaciones"      content={toSafeString(a.indicaciones)}      icon={<IoDocumentTextOutline  className="w-3 h-3 text-slate-400" />} />
+              <Section title="Solicitud examenes" content={toSafeString(a.solicitudExamenes)} icon={<IoFlaskOutline          className="w-3 h-3 text-slate-400" />} />
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -123,30 +157,39 @@ function AtencionAccordion({ a, idx }: { a: AtencionPasada; idx: number }) {
 
 const HistorialModal: React.FC<Props> = ({ cita, onClose }) => {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden">
-
-        {/* Header */}
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+    >
+      <div
+        className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl flex flex-col overflow-hidden"
+        style={{ maxHeight: "90vh" }}
+      >
         <div className="bg-[#0A1733] px-6 py-5 flex items-center justify-between shrink-0">
           <div>
-            <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-0.5">
-              Historial Clínico
-            </p>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-0.5">Historial Clinico</p>
             <p className="text-base font-black text-white">{cita.pacienteNombres}</p>
-            <p className="text-xs text-white/50">DNI {cita.pacienteDni}</p>
+            <p className="text-xs text-white/50 mt-0.5">DNI {cita.pacienteDni}</p>
           </div>
-          <button
-            onClick={onClose}
-            className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
-          >
-            <IoCloseOutline className="w-5 h-5 text-white" />
-          </button>
+          <div className="flex items-center gap-3">
+            <span className="text-[11px] font-bold bg-white/10 text-white/70 px-3 py-1 rounded-full">
+              {cita.historialConsultas.length} atencion{cita.historialConsultas.length !== 1 ? "es" : ""}
+            </span>
+            <button
+              onClick={onClose}
+              className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+            >
+              <IoCloseOutline className="w-5 h-5 text-white" />
+            </button>
+          </div>
         </div>
 
-        {/* Content */}
-        <div className="overflow-y-auto px-6 py-5 space-y-3">
+        <div className="overflow-y-auto px-5 py-5 space-y-3 bg-[#ECF4FC]">
           {cita.historialConsultas.length === 0 ? (
-            <p className="text-sm text-slate-400 text-center py-10">Sin atenciones previas registradas.</p>
+            <div className="flex flex-col items-center justify-center py-16 gap-2 text-slate-400">
+              <IoDocumentTextOutline className="w-10 h-10" />
+              <p className="text-sm font-medium">Sin atenciones previas registradas.</p>
+            </div>
           ) : (
             cita.historialConsultas.map((a, i) => (
               <AtencionAccordion key={i} a={a} idx={i} />

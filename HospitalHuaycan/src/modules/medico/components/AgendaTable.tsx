@@ -1,12 +1,12 @@
 import React from "react";
-import { IoTimeOutline, IoRefreshOutline } from "react-icons/io5";
+import { IoTimeOutline, IoRefreshOutline, IoDocumentTextOutline } from "react-icons/io5";
 import { CitaMedico } from "../types";
 
 const ESTADO_STYLE: Record<string, string> = {
-  PENDIENTE:   "bg-amber-100 text-amber-700",
-  EN_ATENCION: "bg-blue-100 text-blue-700",
-  ATENDIDO:    "bg-emerald-100 text-emerald-700",
-  CANCELADO:   "bg-slate-100 text-slate-500",
+  PENDIENTE:   "bg-amber-50 text-amber-700 border border-amber-200",
+  EN_ATENCION: "bg-blue-50 text-blue-700 border border-blue-200",
+  ATENDIDO:    "bg-emerald-50 text-emerald-700 border border-emerald-200",
+  CANCELADO:   "bg-slate-100 text-slate-500 border border-slate-200",
 };
 
 const ESTADO_LABEL: Record<string, string> = {
@@ -17,8 +17,16 @@ const ESTADO_LABEL: Record<string, string> = {
 };
 
 function formatHora(h: string) {
-  // "HH:mm:ss" → "HH:mm"
   return h?.slice(0, 5) ?? "—";
+}
+
+function getInitials(nombre: string) {
+  return nombre
+    .split(" ")
+    .slice(0, 2)
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase();
 }
 
 interface Props {
@@ -31,7 +39,7 @@ interface Props {
 const AgendaTable: React.FC<Props> = ({ agenda, isLoading, onRefresh, onSelect }) => {
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-40 text-slate-400">
+      <div className="flex items-center justify-center h-44 text-slate-400">
         <div className="animate-spin w-6 h-6 border-2 border-slate-200 border-t-[#CA0000] rounded-full mr-3" />
         Cargando agenda…
       </div>
@@ -40,7 +48,7 @@ const AgendaTable: React.FC<Props> = ({ agenda, isLoading, onRefresh, onSelect }
 
   if (agenda.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center h-40 gap-3 text-slate-400">
+      <div className="flex flex-col items-center justify-center h-44 gap-3 text-slate-400">
         <IoTimeOutline className="w-10 h-10" />
         <p className="text-sm font-medium">No hay citas programadas para hoy.</p>
         <button
@@ -54,41 +62,64 @@ const AgendaTable: React.FC<Props> = ({ agenda, isLoading, onRefresh, onSelect }
   }
 
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-sm">
-        <thead>
-          <tr className="border-b border-slate-100">
-            <th className="text-left py-3 px-4 text-[10px] font-bold uppercase tracking-widest text-slate-400">Hora</th>
-            <th className="text-left py-3 px-4 text-[10px] font-bold uppercase tracking-widest text-slate-400">Paciente</th>
-            <th className="text-left py-3 px-4 text-[10px] font-bold uppercase tracking-widest text-slate-400">DNI</th>
-            <th className="text-left py-3 px-4 text-[10px] font-bold uppercase tracking-widest text-slate-400">Estado</th>
-            <th className="text-left py-3 px-4 text-[10px] font-bold uppercase tracking-widest text-slate-400">Historial</th>
-          </tr>
-        </thead>
-        <tbody>
-          {agenda.map((cita) => (
-            <tr key={cita.citaId} className="border-b border-slate-50 hover:bg-slate-50 transition-colors">
-              <td className="py-3 px-4 font-mono font-semibold text-[#0A1733]">{formatHora(cita.horaInicio)}</td>
-              <td className="py-3 px-4 font-semibold text-[#0A1733]">{cita.pacienteNombres}</td>
-              <td className="py-3 px-4 text-slate-500">{cita.pacienteDni}</td>
-              <td className="py-3 px-4">
-                <span className={`text-[11px] font-bold px-2.5 py-1 rounded-full ${ESTADO_STYLE[cita.estadoConsulta] ?? "bg-slate-100 text-slate-500"}`}>
-                  {ESTADO_LABEL[cita.estadoConsulta] ?? cita.estadoConsulta}
-                </span>
-              </td>
-              <td className="py-3 px-4">
-                <button
-                  onClick={() => onSelect(cita)}
-                  className="text-xs font-bold text-[#CA0000] hover:underline disabled:opacity-30 disabled:cursor-not-allowed"
-                  disabled={!cita.historialConsultas?.length}
-                >
-                  Ver historial ({cita.historialConsultas?.length ?? 0})
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="divide-y divide-slate-50">
+      {agenda.map((cita, idx) => (
+        <div
+          key={cita.citaId}
+          className="flex items-center gap-4 px-6 py-4 hover:bg-slate-50/70 transition-colors group"
+        >
+          {/* Número de orden */}
+          <span className="text-[11px] font-black text-slate-300 w-5 shrink-0 text-right">
+            {String(idx + 1).padStart(2, "0")}
+          </span>
+
+          {/* Hora */}
+          <div className="w-16 shrink-0">
+            <p className="text-base font-black text-[#0A1733] font-mono leading-none">
+              {formatHora(cita.horaInicio)}
+            </p>
+            <p className="text-[10px] text-slate-400 font-semibold mt-0.5">hrs</p>
+          </div>
+
+          {/* Avatar + nombre */}
+          <div className="flex items-center gap-3 flex-1 min-w-0">
+            <div className="w-9 h-9 rounded-full bg-[#0A1733] flex items-center justify-center shrink-0">
+              <span className="text-[11px] font-black text-white">
+                {getInitials(cita.pacienteNombres)}
+              </span>
+            </div>
+            <div className="min-w-0">
+              <p className="text-sm font-bold text-[#0A1733] truncate">{cita.pacienteNombres}</p>
+              <p className="text-[11px] text-slate-400 font-medium">DNI {cita.pacienteDni}</p>
+            </div>
+          </div>
+
+          {/* Estado */}
+          <span
+            className={`text-[11px] font-bold px-3 py-1 rounded-full shrink-0
+              ${ESTADO_STYLE[cita.estadoConsulta] ?? "bg-slate-100 text-slate-500 border border-slate-200"}`}
+          >
+            {ESTADO_LABEL[cita.estadoConsulta] ?? cita.estadoConsulta}
+          </span>
+
+          {/* Botón historial */}
+          <button
+            onClick={() => onSelect(cita)}
+            disabled={!cita.historialConsultas?.length}
+            className="flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-xl border transition-colors shrink-0
+              enabled:border-[#CA0000]/30 enabled:text-[#CA0000] enabled:hover:bg-[#CA0000]/5
+              disabled:border-slate-100 disabled:text-slate-300 disabled:cursor-not-allowed"
+          >
+            <IoDocumentTextOutline className="w-3.5 h-3.5" />
+            Historial
+            {(cita.historialConsultas?.length ?? 0) > 0 && (
+              <span className="bg-[#CA0000] text-white text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center">
+                {cita.historialConsultas.length}
+              </span>
+            )}
+          </button>
+        </div>
+      ))}
     </div>
   );
 };
