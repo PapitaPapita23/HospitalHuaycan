@@ -1,4 +1,5 @@
 import React, { createContext, useMemo, useState, useEffect } from 'react'
+import { supabase } from '../../../lib/supabase'
 
 export type UserRole = string | null
 
@@ -24,14 +25,40 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [userRole, setUserRoleState] = useState<UserRole>(null)
 
-  // Efecto para restaurar la sesión al cargar la aplicación
+  // Restaurar sesión activa de Supabase al cargar
   useEffect(() => {
-    const token = localStorage.getItem('token')
-    const rol = localStorage.getItem('rol')
-    if (token && rol) {
-      setIsAuthenticated(true)
-      setUserRoleState(rol)
-    }
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
+        const rol = session.user.user_metadata?.rol ?? null
+        const nombreCompleto = session.user.user_metadata?.nombre_completo ?? session.user.email ?? ''
+        localStorage.setItem('token', session.access_token)
+        localStorage.setItem('rol', rol ?? '')
+        localStorage.setItem('nombreCompleto', nombreCompleto)
+        setIsAuthenticated(true)
+        setUserRoleState(rol)
+      }
+    })
+
+    // Escuchar cambios de sesión (login/logout desde otra pestaña)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session) {
+        const rol = session.user.user_metadata?.rol ?? null
+        const nombreCompleto = session.user.user_metadata?.nombre_completo ?? session.user.email ?? ''
+        localStorage.setItem('token', session.access_token)
+        localStorage.setItem('rol', rol ?? '')
+        localStorage.setItem('nombreCompleto', nombreCompleto)
+        setIsAuthenticated(true)
+        setUserRoleState(rol)
+      } else {
+        localStorage.removeItem('token')
+        localStorage.removeItem('rol')
+        localStorage.removeItem('nombreCompleto')
+        setIsAuthenticated(false)
+        setUserRoleState(null)
+      }
+    })
+
+    return () => subscription.unsubscribe()
   }, [])
 
   const handleLogin = async (email: string, password: string) => {
@@ -39,41 +66,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       throw new Error('Credenciales incompletas')
     }
 
-    try {
-      const response = await fetch('http://localhost:8080/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username: email, // Mapeamos email como username esperado por el backend
-          password: password,
-        }),
-      })
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password })
 
-      if (!response.ok) {
-        // Leemos el mensaje de error retornado por el backend si existe
-        const errorText = await response.text()
-        throw new Error(errorText || 'Credenciales inválidas')
-      }
-
-      const data = await response.json()
-      
-      // Guardar información en localStorage
-      localStorage.setItem('token', data.token)
-      localStorage.setItem('rol', data.rol)
-      localStorage.setItem('nombreCompleto', data.nombreCompleto)
-
-      // Actualizar estados
-      setIsAuthenticated(true)
-      setUserRoleState(data.rol)
-    } catch (error: any) {
-      console.error('Error al intentar iniciar sesión:', error)
-      throw error // Lanzamos para que LoginForm lo capture
+    if (error) {
+      throw new Error(error.message)
     }
+
+    const rol = data.user.user_metadata?.rol ?? null
+    const nombreCompleto = data.user.user_metadata?.nombre_completo ?? data.user.email ?? ''
+
+    localStorage.setItem('token', data.session.access_token)
+    localStorage.setItem('rol', rol ?? '')
+    localStorage.setItem('nombreCompleto', nombreCompleto)
+
+    setIsAuthenticated(true)
+    setUserRoleState(rol)
   }
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await supabase.auth.signOut()
     localStorage.removeItem('token')
     localStorage.removeItem('rol')
     localStorage.removeItem('nombreCompleto')

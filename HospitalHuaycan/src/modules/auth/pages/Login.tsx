@@ -27,8 +27,8 @@ const Login: React.FC = () => {
       <div className="min-h-screen bg-black/25">
         <div className="mx-auto flex min-h-screen w-full max-w-7xl items-center px-6 py-8 md:px-10 lg:px-14">
           <div className="grid w-full items-center gap-10 lg:grid-cols-[1fr_auto] lg:gap-14">
-            <div className="text-left text-white">
-              <h1 className="max-w-xl text-4xl font-bold uppercase leading-[1.05] tracking-tight md:text-5xl lg:text-6xl">
+            <div className="hidden lg:block text-left text-white">
+              <h1 className="max-w-xl text-4xl font-bold uppercase leading-[1.05] tracking-tight lg:text-6xl">
                 Historias clinicas hospitalarias
               </h1>
             </div>
