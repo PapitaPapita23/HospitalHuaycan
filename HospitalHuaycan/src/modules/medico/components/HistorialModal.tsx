@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 import {
   IoCloseOutline, IoChevronDownOutline, IoHeartOutline,
   IoDocumentTextOutline, IoMedkitOutline, IoFlaskOutline,
@@ -23,8 +23,8 @@ function toSafeString(val: unknown): string | null {
       .filter(Boolean);
     return items.length ? items.join(" | ") : null;
   }
-  if (typeof val === "object") return JSON.stringify(val);
-  return String(val);
+  if (typeof val === "object") return JSON.stringify(val).replace(/\\n/g, '\n');
+  return String(val).replace(/\\n/g, '\n');
 }
 
 const Vital = ({ label, value, unit }: { label: string; value: number | string | null | undefined; unit?: string }) => (
@@ -185,8 +185,45 @@ const HistorialModal: React.FC<Props> = ({ cita, onClose }) => {
         </div>
 
         <div className="overflow-y-auto px-5 py-5 space-y-3 bg-[#ECF4FC]">
+          {/* SECCIÓN DE DOCUMENTOS ANTIGUOS ESCANEADOS */}
+          {cita.documentosEscaneados && cita.documentosEscaneados.length > 0 && (
+            <div className="mb-6">
+              <h3 className="text-sm font-bold text-[#0A1733] mb-3 flex items-center gap-2">
+                <IoDocumentTextOutline className="w-5 h-5 text-blue-600" />
+                Documentos Históricos Escaneados
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {cita.documentosEscaneados.map((doc: any) => (
+                  <a
+                    key={doc.id}
+                    href={doc.urlArchivo}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-3 p-3 bg-white rounded-xl shadow-sm border border-slate-200 hover:border-blue-400 hover:shadow-md transition-all group"
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center shrink-0 group-hover:bg-blue-100 transition-colors">
+                      <IoDocumentTextOutline className="w-5 h-5 text-blue-600" />
+                    </div>
+                    <div className="overflow-hidden">
+                      <p className="text-sm font-bold text-slate-800 truncate" title={doc.nombreArchivo}>
+                        {doc.nombreArchivo}
+                      </p>
+                      <p className="text-[10px] font-semibold text-slate-400 mt-0.5">
+                        {new Date(doc.fechaSubida).toLocaleDateString("es-PE")} • Ver PDF
+                      </p>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* SECCIÓN DE ATENCIONES PREVIAS (SISTEMA) */}
+          <h3 className="text-sm font-bold text-[#0A1733] mb-3 pt-2">
+            Atenciones Previas en Sistema
+          </h3>
           {cita.historialConsultas.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-16 gap-2 text-slate-400">
+            <div className="flex flex-col items-center justify-center py-10 gap-2 text-slate-400 bg-white rounded-2xl border border-slate-100">
               <IoDocumentTextOutline className="w-10 h-10" />
               <p className="text-sm font-medium">Sin atenciones previas registradas.</p>
             </div>

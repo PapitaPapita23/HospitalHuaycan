@@ -1,14 +1,13 @@
-import { supabase } from "../../../lib/supabase";
+import { apiGet } from "../../../lib/apiClient";
 import { CitaMedico } from "../types";
 
 export async function getAgendaHoy(): Promise<CitaMedico[]> {
   const userId = localStorage.getItem("userId");
   if (!userId) throw new Error("Sesión no iniciada");
 
-  const { data, error } = await supabase.rpc("get_agenda_medico_hoy", {
-    p_usuario_id: Number(userId),
-  });
-
-  if (error) throw new Error(error.message);
-  return (data as CitaMedico[]) ?? [];
+  try {
+    return await apiGet<CitaMedico[]>("/consultas/agenda-hoy");
+  } catch (error: any) {
+    throw new Error(error.message || "Error al obtener la agenda de hoy");
+  }
 }

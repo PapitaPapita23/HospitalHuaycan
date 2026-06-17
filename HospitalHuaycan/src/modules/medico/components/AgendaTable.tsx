@@ -105,7 +105,7 @@ const AgendaTable: React.FC<Props> = ({ agenda, isLoading, onRefresh, onSelect }
           {/* Botón historial */}
           <button
             onClick={() => onSelect(cita)}
-            disabled={!cita.historialConsultas?.length}
+            disabled={!(cita.historialConsultas?.length || cita.documentosEscaneados?.length)}
             className="flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-xl border transition-colors shrink-0
               enabled:border-[#CA0000]/30 enabled:text-[#CA0000] enabled:hover:bg-[#CA0000]/5
               disabled:border-slate-100 disabled:text-slate-300 disabled:cursor-not-allowed"
@@ -115,6 +115,11 @@ const AgendaTable: React.FC<Props> = ({ agenda, isLoading, onRefresh, onSelect }
             {(cita.historialConsultas?.length ?? 0) > 0 && (
               <span className="bg-[#CA0000] text-white text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center">
                 {cita.historialConsultas.length}
+              </span>
+            )}
+            {(cita.documentosEscaneados?.length ?? 0) > 0 && (
+              <span className="bg-blue-600 text-white text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center">
+                {cita.documentosEscaneados.length}
               </span>
             )}
           </button>
