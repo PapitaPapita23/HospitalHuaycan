@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/hospital_hc
-    username: postgres
-    password: root
+    url: jdbc:postgresql://aws-1-sa-east-1.pooler.supabase.com:5432/postgres?sslmode=require
+    username: postgres.maptsdpqsyuvmmqhnofv
+    password: ZSGhQwZBUl1EQpCV
     hikari:
       initialization-fail-timeout: 0
   jpa:

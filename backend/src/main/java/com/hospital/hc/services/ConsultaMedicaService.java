@@ -37,19 +37,34 @@ public class ConsultaMedicaService {
     @Autowired
     private AtencionMedicaRepository atencionMedicaRepository;
 
+    @Autowired
+    private com.hospital.hc.repositories.DocumentoEscaneadoRepository documentoEscaneadoRepository;
+
     public List<CitaMedicoHU04Dto> obtenerAgendaDia(String username) {
         Medico medico = medicoRepository.findByUsuarioUsername(username)
-                .orElseThrow(() -> new RuntimeException("No se encontr\u00f3 el perfil de m\u00e9dico asociado al usuario."));
+                .orElseThrow(() -> new RuntimeException("No se encontró el perfil de médico asociado al usuario."));
 
         List<CitaMedica> citasHoy = citaMedicaRepository.findByMedicoIdAndFechaCitaOrderByHoraCitaAsc(medico.getId(), LocalDate.now());
 
         return citasHoy.stream().map(cita -> {
             List<AtencionPasadaDto> historialConsultas = new ArrayList<>();
+            List<com.hospital.hc.dto.DocumentoEscaneadoDto> documentosEscaneados = new ArrayList<>();
 
             Optional<HistoriaClinica> historiaOpt = historiaClinicaRepository.findByPacienteId(cita.getPaciente().getId());
             if (historiaOpt.isPresent()) {
-                List<AtencionMedica> atencionesPasadas = atencionMedicaRepository.findByHistoriaClinicaIdOrderByFechaAtencionDesc(historiaOpt.get().getId());
+                Long historiaId = historiaOpt.get().getId();
+                List<AtencionMedica> atencionesPasadas = atencionMedicaRepository.findByHistoriaClinicaIdOrderByFechaAtencionDesc(historiaId);
                 historialConsultas = atencionesPasadas.stream().map(this::mapToAtencionPasadaDto).collect(Collectors.toList());
+
+                documentosEscaneados = documentoEscaneadoRepository.findByHistoriaClinicaIdOrderByFechaSubidaDesc(historiaId)
+                        .stream().map(doc -> com.hospital.hc.dto.DocumentoEscaneadoDto.builder()
+                                .id(doc.getId())
+                                .historiaClinicaId(historiaId)
+                                .nombreArchivo(doc.getNombreArchivo())
+                                .urlArchivo(doc.getUrlArchivo())
+                                .fechaSubida(doc.getFechaSubida())
+                                .build()
+                        ).collect(Collectors.toList());
             }
 
             return CitaMedicoHU04Dto.builder()
@@ -59,6 +74,7 @@ public class ConsultaMedicaService {
                     .pacienteDni(cita.getPaciente().getDni())
                     .pacienteNombres(cita.getPaciente().getNombre() + " " + cita.getPaciente().getApellidos())
                     .historialConsultas(historialConsultas)
+                    .documentosEscaneados(documentosEscaneados)
                     .build();
         }).collect(Collectors.toList());
     }

@@ -27,4 +27,5 @@ export interface CitaMedico {
   pacienteDni: string;
   pacienteNombres: string;
   historialConsultas: AtencionPasada[];
+  documentosEscaneados: any[];
 }

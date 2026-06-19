@@ -18,6 +18,8 @@ import MedicoPage from "../pages/MedicoPage";
 import TriajePage from "../pages/TriajePage";
 import ArchivoPage from "../pages/ArchivoPage";
 
+import MigracionHistoriasTest from "../../modules/archivo/MigracionHistoriasTest";
+
 const AppRouter: React.FC = () => {
   return (
     <Routes>
@@ -50,6 +52,9 @@ const AppRouter: React.FC = () => {
         <Route element={<ProtectedRoute allowedRoles={["ROLE_ARCHIVO"]} />}>
           <Route path="/archivo" element={<ArchivoPage />} />
         </Route>
+
+        {/* Ruta de Prueba para la Demostración HU08 */}
+        <Route path="/test-migracion" element={<MigracionHistoriasTest />} />
 
         {/* Rutas Comunes Adicionales */}
         <Route path="/calendar" element={<CalendarPage />} />
