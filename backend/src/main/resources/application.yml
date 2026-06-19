@@ -32,3 +32,6 @@ apiperu:
   url: https://apiperu.dev/api/dni
   token: 18155|w1r35b4TmjwlS8M8K8ephJs2TISPlIjyRcXGxRteb0bf321a
 
+groq:
+  api-key: ${GROQ_API_KEY}
+

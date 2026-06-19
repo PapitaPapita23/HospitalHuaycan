@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { IoSearchOutline, IoFolderOpenOutline, IoAlertCircleOutline } from "react-icons/io5";
 import { useArchivoSearch } from "../../modules/archivo/hooks/useArchivoSearch";
 import PatientDataCard from "../../modules/archivo/components/PatientDataCard";
-import UploadHistoriaAnexa from "../../modules/archivo/components/UploadHistoriaAnexa";
+import DocumentScanner from "../../modules/archivo/components/DocumentScanner";
 
 const ArchivoPage: React.FC = () => {
   const { query, setQuery, result, isSearching, notFound, error, handleSearch, handleReset } =
@@ -87,7 +87,7 @@ const ArchivoPage: React.FC = () => {
       {result && (
         <div className="space-y-6">
           <PatientDataCard patient={result} onReset={handleReset} />
-          <UploadHistoriaAnexa historiaClinicaId={result.historiaClinicaId} />
+          <DocumentScanner historiaClinicaId={result.historiaClinicaId} />
         </div>
       )}
 
