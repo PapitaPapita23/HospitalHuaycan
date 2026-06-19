@@ -1,7 +1,9 @@
 import { supabase } from "../../../lib/supabase";
-import { PacienteDTO, Especialidad, Medico, CitaResponseDTO, PatientState } from "../types";
+import { PacienteDTO, Especialidad, Medico, CitaResponseDTO, PatientState, AppointmentItem, SearchPatientResponse } from "../types";
+import { apiGet } from "../../../lib/apiClient";
 
-const APIPERU_TOKEN = "80b5206ae670e7fbb81e2f575bb48c3f05b473be8c51e79ba0b68137d163653d";
+const APIPERU_TOKEN = "18155|w1r35b4TmjwlS8M8K8ephJs2TISPlIjyRcXGxRteb0bf321a";
+
 
 /**
  * Consulta la API de RENIEC (ApiPeru) directamente desde el frontend usando el token provisto.
@@ -38,20 +40,23 @@ export async function searchReniecDirectly(dni: string): Promise<{ nombre: strin
 /**
  * Busca un paciente por DNI en el sistema de forma jerárquica:
  * 1. Consulta la base de datos de Supabase vía el RPC existente.
- * 2. Si no existe, intenta con el backend de Spring Boot (que a su vez consulta RENIEC y registra).
- * 3. Si Spring Boot falla o está apagado, llama a RENIEC desde el frontend y lo registra automáticamente.
+ * 2. Si no existe, intenta con el backend de Spring Boot. Si el backend retorna con id, se sincroniza.
+ * 3. Si no está registrado en base de datos, llama a RENIEC (desde backend o frontend) y retorna sus datos sin registrarlos todavía.
  */
-export async function searchPatientByDni(dni: string): Promise<PatientState | null> {
+export async function searchPatientByDni(dni: string): Promise<SearchPatientResponse | null> {
   // Paso 1: Buscar en Supabase usando el RPC existente buscar_paciente_dni
   try {
     const { data, error } = await supabase.rpc("buscar_paciente_dni", { p_dni: dni });
     if (!error && data) {
       const p = data as PacienteDTO;
       return {
-        id: Number(p.id),
-        dni: p.dni,
-        nombreCompleto: `${p.nombre} ${p.apellidos}`,
-        isNew: false
+        registered: true,
+        patient: {
+          id: Number(p.id),
+          dni: p.dni,
+          nombreCompleto: `${p.nombre} ${p.apellidos}`,
+          isNew: false
+        }
       };
     }
     if (error) {
@@ -66,58 +71,69 @@ export async function searchPatientByDni(dni: string): Promise<PatientState | nu
     const response = await fetch(`http://localhost:8080/api/pacientes/buscar?dni=${dni}`);
     if (response.ok) {
       const p = await response.json();
-      // Registrar automáticamente en Supabase para obtener el ID correcto de Supabase, no el ID local del backend
-      try {
-        const newPatient = await registerPatientQuick({
-          dni: p.dni,
-          nombre: p.nombre,
-          apellidos: p.apellidos,
-          fechaNacimiento: "1900-01-01",
-          genero: "O"
-        });
-        return {
-          ...newPatient,
-          isNew: true
-        };
-      } catch (regErr) {
-        // Si ya existía en Supabase (por ejemplo, duplicado de DNI)
-        const { data: retryData } = await supabase.rpc("buscar_paciente_dni", { p_dni: dni });
-        if (retryData) {
-          const rp = retryData as PacienteDTO;
+      
+      // Si el backend retornó un id válido, significa que el paciente ya está registrado en la base de datos local de Spring Boot
+      if (p.id) {
+        // Lo sincronizamos en Supabase para obtener el ID correcto de Supabase
+        try {
+          const newPatient = await registerPatientQuick({
+            dni: p.dni,
+            nombre: p.nombre,
+            apellidos: p.apellidos,
+            fechaNacimiento: "1900-01-01",
+            genero: "O"
+          });
           return {
-            id: Number(rp.id),
-            dni: rp.dni,
-            nombreCompleto: `${rp.nombre} ${rp.apellidos}`,
-            isNew: false
+            registered: true,
+            patient: {
+              ...newPatient,
+              isNew: false
+            }
           };
+        } catch (regErr) {
+          // Si ya existía en Supabase (por ejemplo, duplicado de DNI)
+          const { data: retryData } = await supabase.rpc("buscar_paciente_dni", { p_dni: dni });
+          if (retryData) {
+            const rp = retryData as PacienteDTO;
+            return {
+              registered: true,
+              patient: {
+                id: Number(rp.id),
+                dni: rp.dni,
+                nombreCompleto: `${rp.nombre} ${rp.apellidos}`,
+                isNew: false
+              }
+            };
+          }
         }
+      } else {
+        // Si no tiene ID (p.id es nulo o indefinido), significa que fue encontrado en RENIEC pero no guardado en la BD
+        return {
+          registered: false,
+          reniecData: {
+            nombre: p.nombre,
+            apellidos: p.apellidos
+          }
+        };
       }
     }
   } catch (err) {
     console.warn("No se pudo conectar con el backend de Spring Boot, intentando RENIEC directo:", err);
   }
 
-  // Paso 3: Consultar RENIEC directamente desde el frontend y registrar en base de datos
+  // Paso 3: Consultar RENIEC directamente desde el frontend y retornar sin guardar en base de datos todavía
   const reniecData = await searchReniecDirectly(dni);
   if (reniecData) {
-    try {
-      const newPatient = await registerPatientQuick({
-        dni,
+    return {
+      registered: false,
+      reniecData: {
         nombre: reniecData.nombre,
-        apellidos: reniecData.apellidos,
-        fechaNacimiento: "1900-01-01",
-        genero: "O"
-      });
-      return {
-        ...newPatient,
-        isNew: true
-      };
-    } catch (err) {
-      console.error("Error al registrar automáticamente al paciente obtenido de RENIEC:", err);
-    }
+        apellidos: reniecData.apellidos
+      }
+    };
   }
 
-  return null;
+  return { registered: false };
 }
 
 /**
@@ -201,3 +217,16 @@ export async function saveCita(params: {
   if (error) throw error;
   return data as CitaResponseDTO;
 }
+
+/**
+ * Obtiene todas las citas de hoy desde el backend de Spring Boot para mostrarlas en la tabla del dashboard de admisión.
+ */
+export async function fetchCitasHoy(fecha?: string): Promise<AppointmentItem[]> {
+  try {
+    const path = fecha ? `/citas?fecha=${fecha}` : "/citas";
+    return await apiGet<AppointmentItem[]>(path);
+  } catch (error: any) {
+    throw new Error(error.message || "Error al obtener las citas de admisión");
+  }
+}
+

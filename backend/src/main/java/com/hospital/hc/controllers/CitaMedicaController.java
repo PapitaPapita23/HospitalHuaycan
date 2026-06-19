@@ -44,6 +44,29 @@ public class CitaMedicaController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @GetMapping
+    public ResponseEntity<?> obtenerCitas(
+            @RequestParam(value = "fecha", required = false) String fechaStr) {
+        LocalDate fecha = fechaStr != null ? LocalDate.parse(fechaStr) : LocalDate.now();
+        java.util.List<CitaMedica> citas = citaMedicaRepository.findByFechaCitaOrderByHoraCitaAsc(fecha);
+        
+        java.util.List<java.util.Map<String, Object>> response = citas.stream().map(cita -> {
+            java.util.Map<String, Object> map = new java.util.HashMap<>();
+            map.put("id", cita.getNumeroTicket() != null ? cita.getNumeroTicket() : "CITA-" + cita.getId());
+            map.put("citaId", cita.getId());
+            map.put("paciente", cita.getPaciente().getNombre() + " " + cita.getPaciente().getApellidos());
+            map.put("dni", cita.getPaciente().getDni());
+            map.put("especialidad", cita.getEspecialidad().getNombre());
+            map.put("medico", cita.getMedico().getNombreCompleto());
+            map.put("turno", cita.getTurno());
+            map.put("fecha", cita.getFechaCita().toString());
+            map.put("estado", cita.getEstado());
+            return map;
+        }).toList();
+        
+        return ResponseEntity.ok(response);
+    }
+
     @PostMapping
     public ResponseEntity<?> agendarCita(@RequestBody CitaRequestDTO dto) {
         // 1. Validar IDs no nulos

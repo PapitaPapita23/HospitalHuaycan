@@ -2,6 +2,7 @@ package com.hospital.hc.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "receta_medica", schema = "hospital_hc")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class RecetaMedica {
@@ -42,6 +44,7 @@ public class RecetaMedica {
     @Column(name = "indicaciones_especiales", columnDefinition = "TEXT")
     private String indicacionesEspeciales;
 
+    @Builder.Default
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 }

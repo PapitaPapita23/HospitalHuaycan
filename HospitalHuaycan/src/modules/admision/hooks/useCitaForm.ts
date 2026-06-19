@@ -88,10 +88,21 @@ export function useCitaForm() {
     setIsSearching(true);
     setPatient(null);
     setPatientNotFound(false);
+    setNewPatientName("");
+    setNewPatientLastName("");
+    setNewPatientBirthDate("");
     try {
       const result = await searchPatientByDni(dniQuery);
-      if (!result) setPatientNotFound(true);
-      else setPatient(result);
+      if (result && result.registered && result.patient) {
+        setPatient(result.patient);
+        setPatientNotFound(false);
+      } else {
+        setPatientNotFound(true);
+        if (result && result.reniecData) {
+          setNewPatientName(result.reniecData.nombre || "");
+          setNewPatientLastName(result.reniecData.apellidos || "");
+        }
+      }
     } catch {
       setErrors({ dniQuery: "Error al buscar el paciente en la base de datos." });
     } finally {

@@ -1,47 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AppointmentItem } from "./types";
 import GenerarCitaFlujo from "./GenerarCitaFlujo";
 import DashboardHeader from "./components/DashboardHeader";
 import StatsGrid from "./components/StatsGrid";
 import ActionsPanel from "./components/ActionsPanel";
 import AppointmentsTable from "./components/AppointmentsTable";
-
-const INITIAL_APPOINTMENTS: AppointmentItem[] = [
-  {
-    id: "HHC-5832",
-    paciente: "Juan Pérez Santos",
-    dni: "12345678",
-    especialidad: "Medicina General",
-    medico: "Dr. Alejandro Ríos",
-    turno: "MANANA",
-    fecha: new Date().toLocaleDateString("sv-SE"),
-    estado: "CONFIRMADA",
-  },
-  {
-    id: "HHC-9214",
-    paciente: "María Rodríguez Ruiz",
-    dni: "87654321",
-    especialidad: "Pediatría",
-    medico: "Dra. Sofía Valdivia",
-    turno: "MANANA",
-    fecha: new Date().toLocaleDateString("sv-SE"),
-    estado: "ATENDIDA",
-  },
-  {
-    id: "HHC-3951",
-    paciente: "Carlos Mendoza Vargas",
-    dni: "99999999",
-    especialidad: "Cardiología",
-    medico: "Dr. Hugo Delgado",
-    turno: "TARDE",
-    fecha: new Date(Date.now() + 86400000).toLocaleDateString("sv-SE"),
-    estado: "CONFIRMADA",
-  },
-];
+import { fetchCitasHoy } from "./services/admisionService";
+import { IoAlertCircleOutline, IoRefreshOutline } from "react-icons/io5";
 
 const AdmisionDashboard: React.FC = () => {
   const [activeFlow, setActiveFlow] = useState<"dashboard" | "agendar">("dashboard");
-  const [appointments] = useState<AppointmentItem[]>(INITIAL_APPOINTMENTS);
+  const [appointments, setAppointments] = useState<AppointmentItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const loadAppointments = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const data = await fetchCitasHoy();
+      setAppointments(data);
+    } catch (err: any) {
+      setError(err.message || "Error al conectar con la base de datos.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (activeFlow === "dashboard") {
+      loadAppointments();
+    }
+  }, [activeFlow]);
 
   if (activeFlow === "agendar") {
     return (
@@ -70,9 +60,32 @@ const AdmisionDashboard: React.FC = () => {
   return (
     <div className="space-y-5">
       <DashboardHeader onNuevaCita={() => setActiveFlow("agendar")} />
-      <StatsGrid />
-      <ActionsPanel onAgendar={() => setActiveFlow("agendar")} />
-      <AppointmentsTable appointments={appointments} />
+
+      {isLoading ? (
+        <div className="flex items-center justify-center h-44 text-slate-450">
+          <div className="animate-spin w-6 h-6 border-2 border-slate-200 border-t-[#CA0000] rounded-full mr-3" />
+          Cargando citas de la base de datos…
+        </div>
+      ) : error ? (
+        <div className="flex flex-col gap-3 bg-red-50 border border-red-100 rounded-2xl p-5">
+          <div className="flex items-center gap-3 text-[#CA0000]">
+            <IoAlertCircleOutline className="w-5 h-5 shrink-0" />
+            <p className="text-sm font-bold">{error}</p>
+          </div>
+          <button
+            onClick={loadAppointments}
+            className="flex items-center gap-1.5 self-start text-xs font-bold text-slate-600 hover:text-slate-800 transition-colors bg-white px-3.5 py-2 border rounded-xl"
+          >
+            <IoRefreshOutline className="w-4 h-4" /> Reintentar
+          </button>
+        </div>
+      ) : (
+        <>
+          <StatsGrid appointments={appointments} />
+          <ActionsPanel onAgendar={() => setActiveFlow("agendar")} />
+          <AppointmentsTable appointments={appointments} />
+        </>
+      )}
     </div>
   );
 };

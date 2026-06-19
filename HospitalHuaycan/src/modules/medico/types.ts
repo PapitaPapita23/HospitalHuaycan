@@ -1,3 +1,13 @@
+export interface MedicamentoReceta {
+  medicamento: string;
+  concentracion: string;
+  forma_farmaceutica: string;
+  dosis: string;
+  frecuencia: string;
+  duracion_dias: number;
+  indicaciones_especiales?: string;
+}
+
 export interface AtencionPasada {
   fechaAtencion: string;
   fr: number;
@@ -18,6 +28,7 @@ export interface AtencionPasada {
   tratamiento: string;
   indicaciones: string;
   solicitudExamenes: string;
+  recetas?: MedicamentoReceta[];
 }
 
 export interface CitaMedico {
@@ -26,6 +37,8 @@ export interface CitaMedico {
   estadoConsulta: string;  // "PENDIENTE" | "ATENDIDO" | "EN_ATENCION" | "CANCELADO"
   pacienteDni: string;
   pacienteNombres: string;
+  historiaClinicaId?: number;
   historialConsultas: AtencionPasada[];
   documentosEscaneados: any[];
 }
+

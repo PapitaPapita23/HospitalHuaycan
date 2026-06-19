@@ -1,0 +1,632 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------------< com.hospital:hc >---------------------------
+[INFO] Building hospital-hc 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ hc ---
+[INFO] Deleting C:\Users\draco\OneDrive\Escritorio\Huaycan-Hospital\backend\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ hc ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ hc ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 61 source files with javac [debug parameters release 17] to target\classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/dto/ConsultaRequestDTO.java:[12,5] com.fasterxml.jackson.annotation.JsonProperty is not a repeatable annotation interface
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[82,16] cannot find symbol
+  symbol:   method setNombreRol(java.lang.String)
+  location: variable rol of type com.hospital.hc.models.Rol
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[83,16] cannot find symbol
+  symbol:   method setDescripcion(java.lang.String)
+  location: variable rol of type com.hospital.hc.models.Rol
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[84,16] cannot find symbol
+  symbol:   method setActivo(boolean)
+  location: variable rol of type com.hospital.hc.models.Rol
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[85,16] cannot find symbol
+  symbol:   method setCreatedAt(java.time.LocalDateTime)
+  location: variable rol of type com.hospital.hc.models.Rol
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[98,20] cannot find symbol
+  symbol:   method setUsername(java.lang.String)
+  location: variable usuario of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[99,20] cannot find symbol
+  symbol:   method setPassword(java.lang.String)
+  location: variable usuario of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[100,20] cannot find symbol
+  symbol:   method setNombreCompleto(java.lang.String)
+  location: variable usuario of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[101,20] cannot find symbol
+  symbol:   method setEstado(java.lang.String)
+  location: variable usuario of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[102,20] cannot find symbol
+  symbol:   method setRol(com.hospital.hc.models.Rol)
+  location: variable usuario of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[103,20] cannot find symbol
+  symbol:   method setIntentosFallidos(short)
+  location: variable usuario of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[104,20] cannot find symbol
+  symbol:   method setCreatedAt(java.time.LocalDateTime)
+  location: variable usuario of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[105,20] cannot find symbol
+  symbol:   method setUpdatedAt(java.time.LocalDateTime)
+  location: variable usuario of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[115,16] cannot find symbol
+  symbol:   method setNombre(java.lang.String)
+  location: variable esp of type com.hospital.hc.models.Especialidad
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[116,16] cannot find symbol
+  symbol:   method setCodigo(java.lang.String)
+  location: variable esp of type com.hospital.hc.models.Especialidad
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[117,16] cannot find symbol
+  symbol:   method setDescripcion(java.lang.String)
+  location: variable esp of type com.hospital.hc.models.Especialidad
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[118,16] cannot find symbol
+  symbol:   method setActivo(boolean)
+  location: variable esp of type com.hospital.hc.models.Especialidad
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[132,18] cannot find symbol
+  symbol:   method setUsername(java.lang.String)
+  location: variable u of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[133,18] cannot find symbol
+  symbol:   method setPassword(java.lang.String)
+  location: variable u of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[134,18] cannot find symbol
+  symbol:   method setNombreCompleto(java.lang.String)
+  location: variable u of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[135,18] cannot find symbol
+  symbol:   method setEstado(java.lang.String)
+  location: variable u of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[136,18] cannot find symbol
+  symbol:   method setRol(com.hospital.hc.models.Rol)
+  location: variable u of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[137,18] cannot find symbol
+  symbol:   method setIntentosFallidos(short)
+  location: variable u of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[138,18] cannot find symbol
+  symbol:   method setCreatedAt(java.time.LocalDateTime)
+  location: variable u of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[139,18] cannot find symbol
+  symbol:   method setUpdatedAt(java.time.LocalDateTime)
+  location: variable u of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[148,19] cannot find symbol
+  symbol:   method setNombreCompleto(java.lang.String)
+  location: variable medico of type com.hospital.hc.models.Medico
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[149,19] cannot find symbol
+  symbol:   method setCip(java.lang.String)
+  location: variable medico of type com.hospital.hc.models.Medico
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[150,19] cannot find symbol
+  symbol:   method setDni(java.lang.String)
+  location: variable medico of type com.hospital.hc.models.Medico
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[151,19] cannot find symbol
+  symbol:   method setEspecialidad(com.hospital.hc.models.Especialidad)
+  location: variable medico of type com.hospital.hc.models.Medico
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[152,19] cannot find symbol
+  symbol:   method setUsuario(com.hospital.hc.models.Usuario)
+  location: variable medico of type com.hospital.hc.models.Medico
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[153,19] cannot find symbol
+  symbol:   method setActivo(boolean)
+  location: variable medico of type com.hospital.hc.models.Medico
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[154,19] cannot find symbol
+  symbol:   method setCreatedAt(java.time.LocalDateTime)
+  location: variable medico of type com.hospital.hc.models.Medico
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[41,37] cannot find symbol
+  symbol:   method getPaciente()
+  location: variable historia of type com.hospital.hc.models.HistoriaClinica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[42,47] cannot find symbol
+  symbol:   method getFechaNacimiento()
+  location: variable paciente of type com.hospital.hc.models.Paciente
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[44,39] cannot find symbol
+  symbol:   method builder()
+  location: class com.hospital.hc.dto.PacienteBusquedaHU03Dto
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[45,37] cannot find symbol
+  symbol:   method getId()
+  location: variable paciente of type com.hospital.hc.models.Paciente
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[46,30] cannot find symbol
+  symbol:   method getDni()
+  location: variable paciente of type com.hospital.hc.models.Paciente
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[47,34] cannot find symbol
+  symbol:   method getNombre()
+  location: variable paciente of type com.hospital.hc.models.Paciente
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[48,36] cannot find symbol
+  symbol:   method getApellidos()
+  location: variable paciente of type com.hospital.hc.models.Paciente
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[49,33] cannot find symbol
+  symbol:   method getGenero()
+  location: variable paciente of type com.hospital.hc.models.Paciente
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[51,41] cannot find symbol
+  symbol:   method getGrupoSanguineo()
+  location: variable paciente of type com.hospital.hc.models.Paciente
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[52,35] cannot find symbol
+  symbol:   method getAlergias()
+  location: variable paciente of type com.hospital.hc.models.Paciente
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[53,36] cannot find symbol
+  symbol:   method getEstadoSis()
+  location: variable paciente of type com.hospital.hc.models.Paciente
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[54,44] cannot find symbol
+  symbol:   method getId()
+  location: variable historia of type com.hospital.hc.models.HistoriaClinica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[55,50] cannot find symbol
+  symbol:   method getFechaCreacion()
+  location: variable historia of type com.hospital.hc.models.HistoriaClinica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[62,17] cannot find symbol
+  symbol:   method setFr(@jakarta.validation.constraints.NotNull(message="La frecuencia respiratoria (fr) es obligatoria."),@jakarta.validation.constraints.Min(value=1L, message="La frecuencia respiratoria debe ser mayor a 0.") java.lang.Short)
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[63,17] cannot find symbol
+  symbol:   method setFc(@jakarta.validation.constraints.NotNull(message="La frecuencia card\u00edaca (fc) es obligatoria."),@jakarta.validation.constraints.Min(value=1L, message="La frecuencia card\u00edaca debe ser mayor a 0.") java.lang.Short)
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[64,17] cannot find symbol
+  symbol:   method setTemperatura(@jakarta.validation.constraints.NotNull(message="La temperatura es obligatoria."),@jakarta.validation.constraints.DecimalMin(value="30.0", message="La temperatura debe ser mayor a 30.0 \u00b0C.") java.math.BigDecimal)
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[65,17] cannot find symbol
+  symbol:   method setPaSistolica(@jakarta.validation.constraints.NotNull(message="La presi\u00f3n arterial sist\u00f3lica (pa_sistolica) es obligatoria.") java.lang.Short)
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[66,17] cannot find symbol
+  symbol:   method setPaDiastolica(@jakarta.validation.constraints.NotNull(message="La presi\u00f3n arterial diast\u00f3lica (pa_diastolica) es obligatoria.") java.lang.Short)
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[67,17] cannot find symbol
+  symbol:   method setSpo2(@jakarta.validation.constraints.NotNull(message="La saturaci\u00f3n de ox\u00edgeno (spo2) es obligatoria."),@jakarta.validation.constraints.DecimalMin("0.0"),@jakarta.validation.constraints.DecimalMax("100.0") java.math.BigDecimal)
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[68,17] cannot find symbol
+  symbol:   method setPeso(@jakarta.validation.constraints.NotNull(message="El peso es obligatorio."),@jakarta.validation.constraints.DecimalMin(value="0.1", message="El peso debe ser mayor a 0 kg.") java.math.BigDecimal)
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[69,17] cannot find symbol
+  symbol:   method setTalla(@jakarta.validation.constraints.NotNull(message="La talla es obligatoria."),@jakarta.validation.constraints.DecimalMin(value="10.0", message="La talla debe ser mayor a 10 cm.") java.math.BigDecimal)
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[70,17] cannot find symbol
+  symbol:   method setImc(@jakarta.validation.constraints.NotNull(message="El IMC es obligatorio."),@jakarta.validation.constraints.DecimalMin(value="0.1", message="El IMC debe ser mayor a 0.") java.math.BigDecimal)
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[73,17] cannot find symbol
+  symbol:   method setTriajeRealizadoPor(com.hospital.hc.models.Usuario)
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[74,17] cannot find symbol
+  symbol:   method setTriajeFechaHora(java.time.LocalDateTime)
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[75,17] cannot find symbol
+  symbol:   method setEstadoConsulta(java.lang.String)
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[76,17] cannot find symbol
+  symbol:   method setUpdatedAt(java.time.LocalDateTime)
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[79,21] cannot find symbol
+  symbol:   method getCita()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[80,21] cannot find symbol
+  symbol:   method getCita()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[81,21] cannot find symbol
+  symbol:   method getCita()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[82,47] cannot find symbol
+  symbol:   method getCita()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[100,39] cannot find symbol
+  symbol:   method getActivo()
+  location: variable cie10 of type com.hospital.hc.models.Cie10
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[105,17] cannot find symbol
+  symbol:   method setAnamnesis(@jakarta.validation.constraints.NotBlank(message="La anamnesis es obligatoria.") java.lang.String)
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[106,17] cannot find symbol
+  symbol:   method setExamenFisico(@jakarta.validation.constraints.NotBlank(message="El examen f\u00edsico es obligatorio.") java.lang.String)
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[107,17] cannot find symbol
+  symbol:   method setDiagnosticoCie10Principal(@jakarta.validation.constraints.NotBlank(message="El diagn\u00f3stico CIE-10 principal es obligatorio.") java.lang.String)
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[108,49] cannot find symbol
+  symbol:   method getDescripcion()
+  location: variable cie10 of type com.hospital.hc.models.Cie10
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[114,25] cannot find symbol
+  symbol:   method setDiagnosticosSecundarios(java.lang.String)
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[119,21] cannot find symbol
+  symbol:   method setDiagnosticosSecundarios(<nulltype>)
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[122,17] cannot find symbol
+  symbol:   method setTratamiento(@jakarta.validation.constraints.NotBlank(message="El tratamiento es obligatorio.") java.lang.String)
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[123,17] cannot find symbol
+  symbol:   method setIndicaciones(java.lang.String)
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[124,17] cannot find symbol
+  symbol:   method setEstadoConsulta(java.lang.String)
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[125,17] cannot find symbol
+  symbol:   method setUpdatedAt(java.time.LocalDateTime)
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[128,21] cannot find symbol
+  symbol:   method getCita()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[129,21] cannot find symbol
+  symbol:   method getCita()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[130,21] cannot find symbol
+  symbol:   method getCita()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[131,47] cannot find symbol
+  symbol:   method getCita()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[139,51] cannot find symbol
+  symbol:   method builder()
+  location: class com.hospital.hc.models.RecetaMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[178,33] cannot find symbol
+  symbol:   method builder()
+  location: class com.hospital.hc.dto.AtencionPasadaDto
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[179,40] cannot find symbol
+  symbol:   method getFechaAtencion()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[180,29] cannot find symbol
+  symbol:   method getFr()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[181,29] cannot find symbol
+  symbol:   method getFc()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[182,38] cannot find symbol
+  symbol:   method getTemperatura()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[183,38] cannot find symbol
+  symbol:   method getPaSistolica()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[184,39] cannot find symbol
+  symbol:   method getPaDiastolica()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[185,31] cannot find symbol
+  symbol:   method getSpo2()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[186,31] cannot find symbol
+  symbol:   method getPeso()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[187,32] cannot find symbol
+  symbol:   method getTalla()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[188,30] cannot find symbol
+  symbol:   method getImc()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[189,38] cannot find symbol
+  symbol:   method getEscalaDolor()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[190,36] cannot find symbol
+  symbol:   method getAnamnesis()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[191,39] cannot find symbol
+  symbol:   method getExamenFisico()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[192,52] cannot find symbol
+  symbol:   method getDiagnosticoCie10Principal()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[193,49] cannot find symbol
+  symbol:   method getDiagnosticoDescripcion()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[194,50] cannot find symbol
+  symbol:   method getDiagnosticosSecundarios()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[195,38] cannot find symbol
+  symbol:   method getTratamiento()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[196,39] cannot find symbol
+  symbol:   method getIndicaciones()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[197,44] cannot find symbol
+  symbol:   method getSolicitudExamenes()
+  location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AuthService.java:[42,44] cannot find symbol
+  symbol:   method getUsername()
+  location: variable loginRequest of type com.hospital.hc.dto.LoginRequest
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AuthService.java:[43,44] cannot find symbol
+  symbol:   method getPassword()
+  location: variable loginRequest of type com.hospital.hc.dto.LoginRequest
+[INFO] 100 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.604 s
+[INFO] Finished at: 2026-06-18T18:20:42-05:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:compile (default-compile) on project hc: Compilation failure: Compilation failure: 
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/dto/ConsultaRequestDTO.java:[12,5] com.fasterxml.jackson.annotation.JsonProperty is not a repeatable annotation interface
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[82,16] cannot find symbol
+[ERROR]   symbol:   method setNombreRol(java.lang.String)
+[ERROR]   location: variable rol of type com.hospital.hc.models.Rol
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[83,16] cannot find symbol
+[ERROR]   symbol:   method setDescripcion(java.lang.String)
+[ERROR]   location: variable rol of type com.hospital.hc.models.Rol
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[84,16] cannot find symbol
+[ERROR]   symbol:   method setActivo(boolean)
+[ERROR]   location: variable rol of type com.hospital.hc.models.Rol
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[85,16] cannot find symbol
+[ERROR]   symbol:   method setCreatedAt(java.time.LocalDateTime)
+[ERROR]   location: variable rol of type com.hospital.hc.models.Rol
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[98,20] cannot find symbol
+[ERROR]   symbol:   method setUsername(java.lang.String)
+[ERROR]   location: variable usuario of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[99,20] cannot find symbol
+[ERROR]   symbol:   method setPassword(java.lang.String)
+[ERROR]   location: variable usuario of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[100,20] cannot find symbol
+[ERROR]   symbol:   method setNombreCompleto(java.lang.String)
+[ERROR]   location: variable usuario of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[101,20] cannot find symbol
+[ERROR]   symbol:   method setEstado(java.lang.String)
+[ERROR]   location: variable usuario of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[102,20] cannot find symbol
+[ERROR]   symbol:   method setRol(com.hospital.hc.models.Rol)
+[ERROR]   location: variable usuario of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[103,20] cannot find symbol
+[ERROR]   symbol:   method setIntentosFallidos(short)
+[ERROR]   location: variable usuario of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[104,20] cannot find symbol
+[ERROR]   symbol:   method setCreatedAt(java.time.LocalDateTime)
+[ERROR]   location: variable usuario of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[105,20] cannot find symbol
+[ERROR]   symbol:   method setUpdatedAt(java.time.LocalDateTime)
+[ERROR]   location: variable usuario of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[115,16] cannot find symbol
+[ERROR]   symbol:   method setNombre(java.lang.String)
+[ERROR]   location: variable esp of type com.hospital.hc.models.Especialidad
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[116,16] cannot find symbol
+[ERROR]   symbol:   method setCodigo(java.lang.String)
+[ERROR]   location: variable esp of type com.hospital.hc.models.Especialidad
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[117,16] cannot find symbol
+[ERROR]   symbol:   method setDescripcion(java.lang.String)
+[ERROR]   location: variable esp of type com.hospital.hc.models.Especialidad
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[118,16] cannot find symbol
+[ERROR]   symbol:   method setActivo(boolean)
+[ERROR]   location: variable esp of type com.hospital.hc.models.Especialidad
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[132,18] cannot find symbol
+[ERROR]   symbol:   method setUsername(java.lang.String)
+[ERROR]   location: variable u of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[133,18] cannot find symbol
+[ERROR]   symbol:   method setPassword(java.lang.String)
+[ERROR]   location: variable u of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[134,18] cannot find symbol
+[ERROR]   symbol:   method setNombreCompleto(java.lang.String)
+[ERROR]   location: variable u of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[135,18] cannot find symbol
+[ERROR]   symbol:   method setEstado(java.lang.String)
+[ERROR]   location: variable u of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[136,18] cannot find symbol
+[ERROR]   symbol:   method setRol(com.hospital.hc.models.Rol)
+[ERROR]   location: variable u of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[137,18] cannot find symbol
+[ERROR]   symbol:   method setIntentosFallidos(short)
+[ERROR]   location: variable u of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[138,18] cannot find symbol
+[ERROR]   symbol:   method setCreatedAt(java.time.LocalDateTime)
+[ERROR]   location: variable u of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[139,18] cannot find symbol
+[ERROR]   symbol:   method setUpdatedAt(java.time.LocalDateTime)
+[ERROR]   location: variable u of type com.hospital.hc.models.Usuario
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[148,19] cannot find symbol
+[ERROR]   symbol:   method setNombreCompleto(java.lang.String)
+[ERROR]   location: variable medico of type com.hospital.hc.models.Medico
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[149,19] cannot find symbol
+[ERROR]   symbol:   method setCip(java.lang.String)
+[ERROR]   location: variable medico of type com.hospital.hc.models.Medico
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[150,19] cannot find symbol
+[ERROR]   symbol:   method setDni(java.lang.String)
+[ERROR]   location: variable medico of type com.hospital.hc.models.Medico
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[151,19] cannot find symbol
+[ERROR]   symbol:   method setEspecialidad(com.hospital.hc.models.Especialidad)
+[ERROR]   location: variable medico of type com.hospital.hc.models.Medico
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[152,19] cannot find symbol
+[ERROR]   symbol:   method setUsuario(com.hospital.hc.models.Usuario)
+[ERROR]   location: variable medico of type com.hospital.hc.models.Medico
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[153,19] cannot find symbol
+[ERROR]   symbol:   method setActivo(boolean)
+[ERROR]   location: variable medico of type com.hospital.hc.models.Medico
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/config/DataSeeder.java:[154,19] cannot find symbol
+[ERROR]   symbol:   method setCreatedAt(java.time.LocalDateTime)
+[ERROR]   location: variable medico of type com.hospital.hc.models.Medico
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[41,37] cannot find symbol
+[ERROR]   symbol:   method getPaciente()
+[ERROR]   location: variable historia of type com.hospital.hc.models.HistoriaClinica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[42,47] cannot find symbol
+[ERROR]   symbol:   method getFechaNacimiento()
+[ERROR]   location: variable paciente of type com.hospital.hc.models.Paciente
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[44,39] cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class com.hospital.hc.dto.PacienteBusquedaHU03Dto
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[45,37] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable paciente of type com.hospital.hc.models.Paciente
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[46,30] cannot find symbol
+[ERROR]   symbol:   method getDni()
+[ERROR]   location: variable paciente of type com.hospital.hc.models.Paciente
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[47,34] cannot find symbol
+[ERROR]   symbol:   method getNombre()
+[ERROR]   location: variable paciente of type com.hospital.hc.models.Paciente
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[48,36] cannot find symbol
+[ERROR]   symbol:   method getApellidos()
+[ERROR]   location: variable paciente of type com.hospital.hc.models.Paciente
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[49,33] cannot find symbol
+[ERROR]   symbol:   method getGenero()
+[ERROR]   location: variable paciente of type com.hospital.hc.models.Paciente
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[51,41] cannot find symbol
+[ERROR]   symbol:   method getGrupoSanguineo()
+[ERROR]   location: variable paciente of type com.hospital.hc.models.Paciente
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[52,35] cannot find symbol
+[ERROR]   symbol:   method getAlergias()
+[ERROR]   location: variable paciente of type com.hospital.hc.models.Paciente
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[53,36] cannot find symbol
+[ERROR]   symbol:   method getEstadoSis()
+[ERROR]   location: variable paciente of type com.hospital.hc.models.Paciente
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[54,44] cannot find symbol
+[ERROR]   symbol:   method getId()
+[ERROR]   location: variable historia of type com.hospital.hc.models.HistoriaClinica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/ArchivoService.java:[55,50] cannot find symbol
+[ERROR]   symbol:   method getFechaCreacion()
+[ERROR]   location: variable historia of type com.hospital.hc.models.HistoriaClinica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[62,17] cannot find symbol
+[ERROR]   symbol:   method setFr(@jakarta.validation.constraints.NotNull(message="La frecuencia respiratoria (fr) es obligatoria."),@jakarta.validation.constraints.Min(value=1L, message="La frecuencia respiratoria debe ser mayor a 0.") java.lang.Short)
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[63,17] cannot find symbol
+[ERROR]   symbol:   method setFc(@jakarta.validation.constraints.NotNull(message="La frecuencia card\u00edaca (fc) es obligatoria."),@jakarta.validation.constraints.Min(value=1L, message="La frecuencia card\u00edaca debe ser mayor a 0.") java.lang.Short)
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[64,17] cannot find symbol
+[ERROR]   symbol:   method setTemperatura(@jakarta.validation.constraints.NotNull(message="La temperatura es obligatoria."),@jakarta.validation.constraints.DecimalMin(value="30.0", message="La temperatura debe ser mayor a 30.0 \u00b0C.") java.math.BigDecimal)
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[65,17] cannot find symbol
+[ERROR]   symbol:   method setPaSistolica(@jakarta.validation.constraints.NotNull(message="La presi\u00f3n arterial sist\u00f3lica (pa_sistolica) es obligatoria.") java.lang.Short)
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[66,17] cannot find symbol
+[ERROR]   symbol:   method setPaDiastolica(@jakarta.validation.constraints.NotNull(message="La presi\u00f3n arterial diast\u00f3lica (pa_diastolica) es obligatoria.") java.lang.Short)
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[67,17] cannot find symbol
+[ERROR]   symbol:   method setSpo2(@jakarta.validation.constraints.NotNull(message="La saturaci\u00f3n de ox\u00edgeno (spo2) es obligatoria."),@jakarta.validation.constraints.DecimalMin("0.0"),@jakarta.validation.constraints.DecimalMax("100.0") java.math.BigDecimal)
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[68,17] cannot find symbol
+[ERROR]   symbol:   method setPeso(@jakarta.validation.constraints.NotNull(message="El peso es obligatorio."),@jakarta.validation.constraints.DecimalMin(value="0.1", message="El peso debe ser mayor a 0 kg.") java.math.BigDecimal)
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[69,17] cannot find symbol
+[ERROR]   symbol:   method setTalla(@jakarta.validation.constraints.NotNull(message="La talla es obligatoria."),@jakarta.validation.constraints.DecimalMin(value="10.0", message="La talla debe ser mayor a 10 cm.") java.math.BigDecimal)
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[70,17] cannot find symbol
+[ERROR]   symbol:   method setImc(@jakarta.validation.constraints.NotNull(message="El IMC es obligatorio."),@jakarta.validation.constraints.DecimalMin(value="0.1", message="El IMC debe ser mayor a 0.") java.math.BigDecimal)
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[73,17] cannot find symbol
+[ERROR]   symbol:   method setTriajeRealizadoPor(com.hospital.hc.models.Usuario)
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[74,17] cannot find symbol
+[ERROR]   symbol:   method setTriajeFechaHora(java.time.LocalDateTime)
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[75,17] cannot find symbol
+[ERROR]   symbol:   method setEstadoConsulta(java.lang.String)
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[76,17] cannot find symbol
+[ERROR]   symbol:   method setUpdatedAt(java.time.LocalDateTime)
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[79,21] cannot find symbol
+[ERROR]   symbol:   method getCita()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[80,21] cannot find symbol
+[ERROR]   symbol:   method getCita()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[81,21] cannot find symbol
+[ERROR]   symbol:   method getCita()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[82,47] cannot find symbol
+[ERROR]   symbol:   method getCita()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[100,39] cannot find symbol
+[ERROR]   symbol:   method getActivo()
+[ERROR]   location: variable cie10 of type com.hospital.hc.models.Cie10
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[105,17] cannot find symbol
+[ERROR]   symbol:   method setAnamnesis(@jakarta.validation.constraints.NotBlank(message="La anamnesis es obligatoria.") java.lang.String)
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[106,17] cannot find symbol
+[ERROR]   symbol:   method setExamenFisico(@jakarta.validation.constraints.NotBlank(message="El examen f\u00edsico es obligatorio.") java.lang.String)
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[107,17] cannot find symbol
+[ERROR]   symbol:   method setDiagnosticoCie10Principal(@jakarta.validation.constraints.NotBlank(message="El diagn\u00f3stico CIE-10 principal es obligatorio.") java.lang.String)
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[108,49] cannot find symbol
+[ERROR]   symbol:   method getDescripcion()
+[ERROR]   location: variable cie10 of type com.hospital.hc.models.Cie10
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[114,25] cannot find symbol
+[ERROR]   symbol:   method setDiagnosticosSecundarios(java.lang.String)
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[119,21] cannot find symbol
+[ERROR]   symbol:   method setDiagnosticosSecundarios(<nulltype>)
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[122,17] cannot find symbol
+[ERROR]   symbol:   method setTratamiento(@jakarta.validation.constraints.NotBlank(message="El tratamiento es obligatorio.") java.lang.String)
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[123,17] cannot find symbol
+[ERROR]   symbol:   method setIndicaciones(java.lang.String)
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[124,17] cannot find symbol
+[ERROR]   symbol:   method setEstadoConsulta(java.lang.String)
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[125,17] cannot find symbol
+[ERROR]   symbol:   method setUpdatedAt(java.time.LocalDateTime)
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[128,21] cannot find symbol
+[ERROR]   symbol:   method getCita()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[129,21] cannot find symbol
+[ERROR]   symbol:   method getCita()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[130,21] cannot find symbol
+[ERROR]   symbol:   method getCita()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[131,47] cannot find symbol
+[ERROR]   symbol:   method getCita()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[139,51] cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class com.hospital.hc.models.RecetaMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[178,33] cannot find symbol
+[ERROR]   symbol:   method builder()
+[ERROR]   location: class com.hospital.hc.dto.AtencionPasadaDto
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[179,40] cannot find symbol
+[ERROR]   symbol:   method getFechaAtencion()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[180,29] cannot find symbol
+[ERROR]   symbol:   method getFr()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[181,29] cannot find symbol
+[ERROR]   symbol:   method getFc()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[182,38] cannot find symbol
+[ERROR]   symbol:   method getTemperatura()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[183,38] cannot find symbol
+[ERROR]   symbol:   method getPaSistolica()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[184,39] cannot find symbol
+[ERROR]   symbol:   method getPaDiastolica()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[185,31] cannot find symbol
+[ERROR]   symbol:   method getSpo2()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[186,31] cannot find symbol
+[ERROR]   symbol:   method getPeso()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[187,32] cannot find symbol
+[ERROR]   symbol:   method getTalla()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[188,30] cannot find symbol
+[ERROR]   symbol:   method getImc()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[189,38] cannot find symbol
+[ERROR]   symbol:   method getEscalaDolor()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[190,36] cannot find symbol
+[ERROR]   symbol:   method getAnamnesis()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[191,39] cannot find symbol
+[ERROR]   symbol:   method getExamenFisico()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[192,52] cannot find symbol
+[ERROR]   symbol:   method getDiagnosticoCie10Principal()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[193,49] cannot find symbol
+[ERROR]   symbol:   method getDiagnosticoDescripcion()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[194,50] cannot find symbol
+[ERROR]   symbol:   method getDiagnosticosSecundarios()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[195,38] cannot find symbol
+[ERROR]   symbol:   method getTratamiento()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[196,39] cannot find symbol
+[ERROR]   symbol:   method getIndicaciones()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AtencionMedicaService.java:[197,44] cannot find symbol
+[ERROR]   symbol:   method getSolicitudExamenes()
+[ERROR]   location: variable atencion of type com.hospital.hc.models.AtencionMedica
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AuthService.java:[42,44] cannot find symbol
+[ERROR]   symbol:   method getUsername()
+[ERROR]   location: variable loginRequest of type com.hospital.hc.dto.LoginRequest
+[ERROR] /C:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/backend/src/main/java/com/hospital/hc/services/AuthService.java:[43,44] cannot find symbol
+[ERROR]   symbol:   method getPassword()
+[ERROR]   location: variable loginRequest of type com.hospital.hc.dto.LoginRequest
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

@@ -42,6 +42,12 @@ export interface PatientState {
   isNew?: boolean;
 }
 
+export interface SearchPatientResponse {
+  registered: boolean;
+  patient?: PatientState;
+  reniecData?: { nombre: string; apellidos: string };
+}
+
 export interface AppointmentItem {
   id: string;
   paciente: string;

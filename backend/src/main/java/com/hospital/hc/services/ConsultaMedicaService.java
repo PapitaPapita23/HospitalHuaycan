@@ -1,6 +1,7 @@
 package com.hospital.hc.services;
 
 import com.hospital.hc.dto.AtencionPasadaDto;
+import com.hospital.hc.dto.MedicamentoRecetaDTO;
 import com.hospital.hc.dto.CitaMedicoHU04Dto;
 import com.hospital.hc.models.AtencionMedica;
 import com.hospital.hc.models.CitaMedica;
@@ -50,9 +51,11 @@ public class ConsultaMedicaService {
             List<AtencionPasadaDto> historialConsultas = new ArrayList<>();
             List<com.hospital.hc.dto.DocumentoEscaneadoDto> documentosEscaneados = new ArrayList<>();
 
+            Long historiaClinicaId = null;
             Optional<HistoriaClinica> historiaOpt = historiaClinicaRepository.findByPacienteId(cita.getPaciente().getId());
             if (historiaOpt.isPresent()) {
                 Long historiaId = historiaOpt.get().getId();
+                historiaClinicaId = historiaId;
                 List<AtencionMedica> atencionesPasadas = atencionMedicaRepository.findByHistoriaClinicaIdOrderByFechaAtencionDesc(historiaId);
                 historialConsultas = atencionesPasadas.stream().map(this::mapToAtencionPasadaDto).collect(Collectors.toList());
 
@@ -67,19 +70,46 @@ public class ConsultaMedicaService {
                         ).collect(Collectors.toList());
             }
 
+            String estadoConsulta = cita.getEstado();
+            if ("PENDIENTE".equals(estadoConsulta)) {
+                AtencionMedica atencion = atencionMedicaRepository.findByCitaId(cita.getId()).orElse(null);
+                if (atencion != null && "EN_CONSULTA".equals(atencion.getEstadoConsulta())) {
+                    estadoConsulta = "EN_CONSULTA";
+                }
+            } else if ("EN_ATENCION".equals(estadoConsulta)) {
+                estadoConsulta = "EN_ATENCION";
+            } else if ("ATENDIDO".equals(estadoConsulta)) {
+                estadoConsulta = "ATENDIDO";
+            }
+
             return CitaMedicoHU04Dto.builder()
                     .citaId(cita.getId())
                     .horaInicio(cita.getHoraCita())
-                    .estadoConsulta(cita.getEstado())
+                    .estadoConsulta(estadoConsulta)
                     .pacienteDni(cita.getPaciente().getDni())
                     .pacienteNombres(cita.getPaciente().getNombre() + " " + cita.getPaciente().getApellidos())
+                    .historiaClinicaId(historiaClinicaId)
                     .historialConsultas(historialConsultas)
                     .documentosEscaneados(documentosEscaneados)
                     .build();
         }).collect(Collectors.toList());
+
     }
 
     private AtencionPasadaDto mapToAtencionPasadaDto(AtencionMedica atencion) {
+        java.util.List<MedicamentoRecetaDTO> recetasDto = new java.util.ArrayList<>();
+        if (atencion.getRecetas() != null) {
+            recetasDto = atencion.getRecetas().stream().map(r -> new MedicamentoRecetaDTO(
+                r.getMedicamento(),
+                r.getConcentracion(),
+                r.getFormaFarmaceutica(),
+                r.getDosis(),
+                r.getFrecuencia(),
+                r.getDuracionDias(),
+                r.getIndicacionesEspeciales()
+            )).toList();
+        }
+
         return AtencionPasadaDto.builder()
                 .fechaAtencion(atencion.getFechaAtencion())
                 .fr(atencion.getFr())
@@ -100,6 +130,7 @@ public class ConsultaMedicaService {
                 .tratamiento(atencion.getTratamiento())
                 .indicaciones(atencion.getIndicaciones())
                 .solicitudExamenes(atencion.getSolicitudExamenes())
+                .recetas(recetasDto)
                 .build();
     }
 }

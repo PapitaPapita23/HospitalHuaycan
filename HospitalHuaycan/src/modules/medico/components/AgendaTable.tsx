@@ -1,18 +1,23 @@
-import React from "react";
-import { IoTimeOutline, IoRefreshOutline, IoDocumentTextOutline } from "react-icons/io5";
+import { IoTimeOutline, IoRefreshOutline, IoDocumentTextOutline, IoPulseOutline } from "react-icons/io5";
 import { CitaMedico } from "../types";
 
 const ESTADO_STYLE: Record<string, string> = {
   PENDIENTE:   "bg-amber-50 text-amber-700 border border-amber-200",
+  EN_TRIAJE:   "bg-amber-50 text-amber-700 border border-amber-200",
+  EN_CONSULTA: "bg-[#CA0000]/10 text-[#CA0000] border border-[#CA0000]/25",
   EN_ATENCION: "bg-blue-50 text-blue-700 border border-blue-200",
   ATENDIDO:    "bg-emerald-50 text-emerald-700 border border-emerald-200",
+  FINALIZADO:  "bg-emerald-50 text-emerald-700 border border-emerald-200",
   CANCELADO:   "bg-slate-100 text-slate-500 border border-slate-200",
 };
 
 const ESTADO_LABEL: Record<string, string> = {
-  PENDIENTE:   "Pendiente",
-  EN_ATENCION: "En atención",
+  PENDIENTE:   "Espera Triaje",
+  EN_TRIAJE:   "En Triaje",
+  EN_CONSULTA: "Listo p/Consulta",
+  EN_ATENCION: "En Consulta",
   ATENDIDO:    "Atendido",
+  FINALIZADO:  "Atendido",
   CANCELADO:   "Cancelado",
 };
 
@@ -34,9 +39,10 @@ interface Props {
   isLoading: boolean;
   onRefresh: () => void;
   onSelect: (cita: CitaMedico) => void;
+  onStartConsulta?: (cita: CitaMedico) => void;
 }
 
-const AgendaTable: React.FC<Props> = ({ agenda, isLoading, onRefresh, onSelect }) => {
+const AgendaTable: React.FC<Props> = ({ agenda, isLoading, onRefresh, onSelect, onStartConsulta }) => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-44 text-slate-400">
@@ -66,7 +72,7 @@ const AgendaTable: React.FC<Props> = ({ agenda, isLoading, onRefresh, onSelect }
       {agenda.map((cita, idx) => (
         <div
           key={cita.citaId}
-          className="flex items-center gap-4 px-6 py-4 hover:bg-slate-50/70 transition-colors group"
+          className="flex flex-wrap sm:flex-nowrap items-center gap-4 px-6 py-4 hover:bg-slate-50/70 transition-colors group"
         >
           {/* Número de orden */}
           <span className="text-[11px] font-black text-slate-300 w-5 shrink-0 text-right">
@@ -96,33 +102,47 @@ const AgendaTable: React.FC<Props> = ({ agenda, isLoading, onRefresh, onSelect }
 
           {/* Estado */}
           <span
-            className={`text-[11px] font-bold px-3 py-1 rounded-full shrink-0
+            className={`text-[10px] font-black px-2.5 py-1 rounded-full border tracking-wide uppercase shrink-0
               ${ESTADO_STYLE[cita.estadoConsulta] ?? "bg-slate-100 text-slate-500 border border-slate-200"}`}
           >
             {ESTADO_LABEL[cita.estadoConsulta] ?? cita.estadoConsulta}
           </span>
 
-          {/* Botón historial */}
-          <button
-            onClick={() => onSelect(cita)}
-            disabled={!(cita.historialConsultas?.length || cita.documentosEscaneados?.length)}
-            className="flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-xl border transition-colors shrink-0
-              enabled:border-[#CA0000]/30 enabled:text-[#CA0000] enabled:hover:bg-[#CA0000]/5
-              disabled:border-slate-100 disabled:text-slate-300 disabled:cursor-not-allowed"
-          >
-            <IoDocumentTextOutline className="w-3.5 h-3.5" />
-            Historial
-            {(cita.historialConsultas?.length ?? 0) > 0 && (
-              <span className="bg-[#CA0000] text-white text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center">
-                {cita.historialConsultas.length}
-              </span>
+          {/* Botones de acción */}
+          <div className="flex items-center gap-2 w-full sm:w-auto justify-end mt-2 sm:mt-0">
+            {/* Botón Atender */}
+            {(cita.estadoConsulta === "EN_CONSULTA" || cita.estadoConsulta === "EN_ATENCION") && onStartConsulta && (
+              <button
+                onClick={() => onStartConsulta(cita)}
+                className="flex items-center gap-1.5 text-xs font-bold px-3.5 py-1.5 rounded-xl bg-[#0A1733] hover:bg-[#CA0000] text-white transition-colors shrink-0 shadow-sm"
+              >
+                <IoPulseOutline className="w-3.5 h-3.5" />
+                Atender
+              </button>
             )}
-            {(cita.documentosEscaneados?.length ?? 0) > 0 && (
-              <span className="bg-blue-600 text-white text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center">
-                {cita.documentosEscaneados.length}
-              </span>
-            )}
-          </button>
+
+            {/* Botón historial */}
+            <button
+              onClick={() => onSelect(cita)}
+              disabled={!(cita.historialConsultas?.length || cita.documentosEscaneados?.length)}
+              className="flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-xl border transition-colors shrink-0
+                enabled:border-[#CA0000]/30 enabled:text-[#CA0000] enabled:hover:bg-[#CA0000]/5
+                disabled:border-slate-100 disabled:text-slate-300 disabled:cursor-not-allowed"
+            >
+              <IoDocumentTextOutline className="w-3.5 h-3.5" />
+              Historial
+              {(cita.historialConsultas?.length ?? 0) > 0 && (
+                <span className="bg-[#CA0000] text-white text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center">
+                  {cita.historialConsultas.length}
+                </span>
+              )}
+              {(cita.documentosEscaneados?.length ?? 0) > 0 && (
+                <span className="bg-blue-600 text-white text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center">
+                  {cita.documentosEscaneados.length}
+                </span>
+              )}
+            </button>
+          </div>
         </div>
       ))}
     </div>

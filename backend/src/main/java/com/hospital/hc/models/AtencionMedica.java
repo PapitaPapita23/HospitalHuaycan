@@ -2,6 +2,7 @@ package com.hospital.hc.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "atencion_medica", schema = "hospital_hc")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class AtencionMedica {
@@ -30,6 +32,7 @@ public class AtencionMedica {
     @JoinColumn(name = "historia_clinica_id", nullable = false)
     private HistoriaClinica historiaClinica;
 
+    @Builder.Default
     @Column(name = "fecha_atencion", nullable = false)
     private LocalDate fechaAtencion = LocalDate.now();
 
@@ -106,6 +109,7 @@ public class AtencionMedica {
     @Column(name = "proxima_cita")
     private LocalDate proximaCita;
 
+    @Builder.Default
     @Column(name = "estado_consulta", nullable = false, length = 15)
     private String estadoConsulta = "PENDIENTE";
 
@@ -113,9 +117,16 @@ public class AtencionMedica {
     @JoinColumn(name = "medico_id")
     private Medico medico;
 
+    @Builder.Default
+    @OneToMany(mappedBy = "atencion", fetch = FetchType.LAZY)
+    private java.util.List<RecetaMedica> recetas = new java.util.ArrayList<>();
+
+
+    @Builder.Default
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
+    @Builder.Default
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt = LocalDateTime.now();
 }

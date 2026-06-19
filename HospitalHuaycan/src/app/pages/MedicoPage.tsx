@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   IoPulseOutline, IoRefreshOutline, IoAlertCircleOutline,
   IoCheckmarkCircleOutline, IoTimeOutline, IoEllipseOutline,
@@ -6,10 +6,15 @@ import {
 import { useAgendaMedico } from "../../modules/medico/hooks/useAgendaMedico";
 import AgendaTable from "../../modules/medico/components/AgendaTable";
 import HistorialModal from "../../modules/medico/components/HistorialModal";
+import ConsultorioMedico from "../../modules/medico/components/ConsultorioMedico";
+import HistorialTimeline from "../../modules/medico/components/HistorialTimeline";
+import { CitaMedico } from "../../modules/medico/types";
 
 const MedicoPage: React.FC = () => {
   const { agenda, isLoading, error, selected, setSelected, load, pendientes, atendidos, enAtencion } =
     useAgendaMedico();
+
+  const [activeConsulta, setActiveConsulta] = useState<CitaMedico | null>(null);
 
   const today = new Date().toLocaleDateString("es-PE", {
     weekday: "long", day: "2-digit", month: "long", year: "numeric",
@@ -17,6 +22,62 @@ const MedicoPage: React.FC = () => {
 
   const total      = agenda.length;
   const progreso   = total > 0 ? Math.round((atendidos / total) * 100) : 0;
+
+  // Render workflow for active consultation
+  if (activeConsulta) {
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-between border-b pb-4">
+          <button
+            onClick={() => setActiveConsulta(null)}
+            className="text-xs font-bold text-[#0A1733] hover:text-[#CA0000] flex items-center gap-1.5 transition-colors"
+          >
+            ← Volver a la Bandeja
+          </button>
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-blue-600 animate-pulse" />
+            <span className="text-xs font-bold text-slate-500">Consulta en Progreso</span>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Lado izquierdo: Formulario de consulta médica */}
+          <div className="lg:col-span-2">
+            <ConsultorioMedico
+              cita={activeConsulta}
+              onSuccess={() => {
+                load();
+                setActiveConsulta(null);
+              }}
+              onCancel={() => setActiveConsulta(null)}
+            />
+          </div>
+
+          {/* Lado derecho: Historial del paciente */}
+          <div className="lg:col-span-1 bg-white border border-slate-100 rounded-2xl p-5 shadow-sm self-start">
+            <div className="flex items-center gap-2 border-b border-slate-50 pb-3 mb-4 text-[#0A1733]">
+              <div className="p-2 bg-[#CA0000]/10 rounded-lg">
+                <IoPulseOutline className="w-4 h-4 text-[#CA0000]" />
+              </div>
+              <div>
+                <h3 className="text-sm font-black">Historial Clínico</h3>
+                <p className="text-[10px] font-semibold text-slate-400">Antecedentes y Atenciones Previas</p>
+              </div>
+            </div>
+            <div className="max-h-[720px] overflow-y-auto pr-1">
+              {activeConsulta.historiaClinicaId ? (
+                <HistorialTimeline historiaClinicaId={activeConsulta.historiaClinicaId} />
+              ) : (
+                <div className="text-center py-6 text-slate-400 text-xs italic">
+                  Sin historia clínica asociada
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -36,7 +97,7 @@ const MedicoPage: React.FC = () => {
           onClick={load}
           disabled={isLoading}
           className="flex items-center gap-2 px-4 py-2 border border-slate-200 hover:bg-slate-50
-                     text-slate-600 text-sm font-semibold rounded-xl transition-colors disabled:opacity-40"
+                     text-slate-650 text-sm font-semibold rounded-xl transition-colors disabled:opacity-40"
         >
           <IoRefreshOutline className={`w-4 h-4 ${isLoading ? "animate-spin" : ""}`} />
           Actualizar
@@ -75,7 +136,7 @@ const MedicoPage: React.FC = () => {
           <IoEllipseOutline className="w-5 h-5 text-blue-400" />
           <div>
             <p className="text-[2.4rem] font-black text-[#0A1733] leading-none">{enAtencion}</p>
-            <p className="text-[11px] text-slate-400 font-semibold mt-1">En atención</p>
+            <p className="text-[11px] text-slate-450 font-semibold mt-1">En atención</p>
           </div>
         </div>
 
@@ -84,7 +145,7 @@ const MedicoPage: React.FC = () => {
           <IoTimeOutline className="w-5 h-5 text-amber-400" />
           <div>
             <p className="text-[2.4rem] font-black text-[#0A1733] leading-none">{pendientes}</p>
-            <p className="text-[11px] text-slate-400 font-semibold mt-1">Pendientes</p>
+            <p className="text-[11px] text-slate-455 font-semibold mt-1">Pendientes</p>
           </div>
         </div>
 
@@ -116,6 +177,7 @@ const MedicoPage: React.FC = () => {
           isLoading={isLoading}
           onRefresh={load}
           onSelect={(cita) => setSelected(cita)}
+          onStartConsulta={(cita) => setActiveConsulta(cita)}
         />
       </div>
 
@@ -127,3 +189,4 @@ const MedicoPage: React.FC = () => {
 };
 
 export default MedicoPage;
+

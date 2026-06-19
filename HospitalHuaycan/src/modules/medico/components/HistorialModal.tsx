@@ -149,6 +149,44 @@ function AtencionAccordion({ a, idx }: { a: AtencionPasada; idx: number }) {
               <Section title="Solicitud examenes" content={toSafeString(a.solicitudExamenes)} icon={<IoFlaskOutline          className="w-3 h-3 text-slate-400" />} />
             </div>
           )}
+
+          {/* Receta Médica */}
+          {a.recetas && a.recetas.length > 0 && (
+            <div className="pt-3 border-t border-slate-50">
+              <div className="flex items-center gap-1.5 mb-2">
+                <IoMedkitOutline className="w-3.5 h-3.5 text-emerald-600" />
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Receta Médica</p>
+              </div>
+              <div className="bg-emerald-50/10 border border-emerald-100/30 rounded-xl p-3.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  {a.recetas.map((rec, rIdx) => (
+                    <div key={rIdx} className="bg-white border border-slate-100 rounded-lg p-2.5 shadow-sm flex flex-col justify-between">
+                      <div>
+                        <p className="text-xs font-bold text-slate-800">
+                          {rec.medicamento} {rec.concentracion && <span className="text-[10px] text-slate-500 font-normal">({rec.concentracion})</span>}
+                        </p>
+                        {rec.forma_farmaceutica && (
+                          <p className="text-[10px] text-slate-400 font-semibold mt-0.5">{rec.forma_farmaceutica}</p>
+                        )}
+                        <div className="flex flex-wrap gap-x-2 gap-y-0.5 mt-1.5 text-[10px] font-bold text-slate-600 bg-slate-50 p-1 px-1.5 rounded-md border border-slate-100/50">
+                          <span>Dosis: {rec.dosis}</span>
+                          <span className="text-slate-300">•</span>
+                          <span>Frec: {rec.frecuencia}</span>
+                          <span className="text-slate-300">•</span>
+                          <span>Días: {rec.duracion_dias} d</span>
+                        </div>
+                      </div>
+                      {rec.indicaciones_especiales && (
+                        <p className="text-[10px] text-slate-500 italic mt-2 border-t border-slate-50 pt-1">
+                          {rec.indicaciones_especiales}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>

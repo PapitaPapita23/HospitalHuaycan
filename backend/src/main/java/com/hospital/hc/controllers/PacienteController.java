@@ -33,24 +33,10 @@ public class PacienteController {
             return ResponseEntity.ok(dto);
         }
 
-        // Paso B y C: Llama a ApiPeruService si no existe en BD local
-        // Si se encuentra en APIPeru, se guarda automáticamente en la base de datos local
+        // Paso B: Llama a ApiPeruService si no existe en BD local (no guardar en la BD todavía)
         return apiPeruService.buscarPorDni(dni)
                 .map(dto -> {
-                    Paciente paciente = new Paciente();
-                    paciente.setDni(dto.getDni());
-                    paciente.setNombre(dto.getNombre());
-                    paciente.setApellidos(dto.getApellidos());
-                    // Valores por defecto requeridos por la base de datos para no violar restricciones NOT NULL
-                    paciente.setFechaNacimiento(LocalDate.of(1900, 1, 1));
-                    paciente.setGenero("O");
-                    paciente.setEstadoSis(false);
-                    paciente.setActivo(true);
-                    paciente.setCreatedAt(LocalDateTime.now());
-                    paciente.setUpdatedAt(LocalDateTime.now());
-
-                    Paciente guardado = pacienteRepository.save(paciente);
-                    dto.setId(guardado.getId());
+                    dto.setId(null); // id is null indicating it's not saved in DB yet
                     return ResponseEntity.ok(dto);
                 })
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());

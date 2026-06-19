@@ -35,4 +35,6 @@ public class AtencionPasadaDto {
     private String tratamiento;
     private String indicaciones;
     private String solicitudExamenes;
+    private java.util.List<MedicamentoRecetaDTO> recetas;
 }
+

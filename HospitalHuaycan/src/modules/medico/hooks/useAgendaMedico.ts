@@ -23,9 +23,10 @@ export function useAgendaMedico() {
 
   useEffect(() => { load(); }, [load]);
 
-  const pendientes  = agenda.filter((c) => c.estadoConsulta === "PENDIENTE").length;
-  const atendidos   = agenda.filter((c) => c.estadoConsulta === "ATENDIDO").length;
-  const enAtencion  = agenda.filter((c) => c.estadoConsulta === "EN_ATENCION").length;
+  const pendientes  = agenda.filter((c) => c.estadoConsulta === "PENDIENTE" || c.estadoConsulta === "EN_TRIAJE").length;
+  const atendidos   = agenda.filter((c) => c.estadoConsulta === "ATENDIDO" || c.estadoConsulta === "FINALIZADO").length;
+  const enAtencion  = agenda.filter((c) => c.estadoConsulta === "EN_CONSULTA" || c.estadoConsulta === "EN_ATENCION").length;
 
   return { agenda, isLoading, error, selected, setSelected, load, pendientes, atendidos, enAtencion };
 }
+

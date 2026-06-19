@@ -18,6 +18,7 @@ public class CitaMedicoHU04Dto {
     private String estadoConsulta;
     private String pacienteDni;
     private String pacienteNombres;
+    private Long historiaClinicaId;
     private List<AtencionPasadaDto> historialConsultas;
     private List<DocumentoEscaneadoDto> documentosEscaneados;
 }
