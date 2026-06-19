@@ -9,6 +9,7 @@ interface Props {
 
 const UploadHistoriaAnexa: React.FC<Props> = ({ historiaClinicaId }) => {
   const [file, setFile] = useState<File | null>(null);
+  const [fechaDocumento, setFechaDocumento] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
   const [uploadMessage, setUploadMessage] = useState({ type: "", text: "" });
 
@@ -25,6 +26,11 @@ const UploadHistoriaAnexa: React.FC<Props> = ({ historiaClinicaId }) => {
 
     if (!file) {
       setUploadMessage({ type: "error", text: "Seleccione un archivo PDF." });
+      return;
+    }
+    
+    if (!fechaDocumento) {
+      setUploadMessage({ type: "error", text: "Seleccione la fecha original del documento." });
       return;
     }
 
@@ -51,10 +57,12 @@ const UploadHistoriaAnexa: React.FC<Props> = ({ historiaClinicaId }) => {
         historiaClinicaId: historiaClinicaId,
         nombreArchivo: file.name,
         urlArchivo: publicUrl,
+        fechaDocumento: fechaDocumento,
       });
 
       setUploadMessage({ type: "success", text: "¡Documento físico anexado correctamente a esta Historia Clínica!" });
       setFile(null);
+      setFechaDocumento("");
       // Opcional: reset file input using a ref, but re-rendering null file is okay.
 
     } catch (error: any) {
@@ -76,44 +84,59 @@ const UploadHistoriaAnexa: React.FC<Props> = ({ historiaClinicaId }) => {
       </div>
       
       <div className="p-6">
-        <form onSubmit={handleUpload} className="flex flex-col sm:flex-row gap-4 items-end">
-          <div className="flex-1 w-full">
-            <label className="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">
-              Seleccionar Archivo Escaneado (PDF)
-            </label>
-            <div className="relative">
-              <input
-                type="file"
-                accept="application/pdf"
-                id="file-upload"
-                className="hidden"
-                onChange={handleFileChange}
-              />
-              <label
-                htmlFor="file-upload"
-                className={`flex items-center gap-3 w-full border-2 border-dashed rounded-xl px-4 py-3 cursor-pointer transition-colors ${
-                  file ? "border-blue-300 bg-blue-50" : "border-slate-300 hover:border-slate-400 bg-slate-50"
-                }`}
-              >
-                <IoDocumentTextOutline className={`w-6 h-6 ${file ? "text-blue-600" : "text-slate-400"}`} />
-                <span className={`text-sm font-medium truncate ${file ? "text-blue-800" : "text-slate-500"}`}>
-                  {file ? file.name : "Haga clic aquí para buscar el archivo PDF..."}
-                </span>
+        <form onSubmit={handleUpload} className="flex flex-col gap-4">
+          <div className="flex flex-col sm:flex-row gap-4 items-end">
+            <div className="flex-1 w-full">
+              <label className="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">
+                Seleccionar Archivo Escaneado (PDF)
               </label>
+              <div className="relative">
+                <input
+                  type="file"
+                  accept="application/pdf"
+                  id="file-upload"
+                  className="hidden"
+                  onChange={handleFileChange}
+                />
+                <label
+                  htmlFor="file-upload"
+                  className={`flex items-center gap-3 w-full border-2 border-dashed rounded-xl px-4 py-3 cursor-pointer transition-colors ${
+                    file ? "border-blue-300 bg-blue-50" : "border-slate-300 hover:border-slate-400 bg-slate-50"
+                  }`}
+                >
+                  <IoDocumentTextOutline className={`w-6 h-6 ${file ? "text-blue-600" : "text-slate-400"}`} />
+                  <span className={`text-sm font-medium truncate ${file ? "text-blue-800" : "text-slate-500"}`}>
+                    {file ? file.name : "Haga clic aquí para buscar el archivo PDF..."}
+                  </span>
+                </label>
+              </div>
             </div>
+            
+            <div className="w-full sm:w-48">
+              <label className="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">
+                Fecha Original
+              </label>
+              <input
+                type="date"
+                required
+                value={fechaDocumento}
+                onChange={(e) => setFechaDocumento(e.target.value)}
+                className="w-full border-2 border-slate-200 rounded-xl px-4 py-3 text-sm font-medium text-[#0A1733] focus:border-blue-500 focus:ring-4 focus:ring-blue-50 outline-none transition-all"
+              />
+            </div>
+            
+            <button
+              type="submit"
+              disabled={isUploading || !file || !fechaDocumento}
+              className={`px-8 py-3 h-[52px] rounded-xl text-sm font-bold text-white transition-all whitespace-nowrap ${
+                isUploading || !file || !fechaDocumento
+                  ? "bg-slate-300 cursor-not-allowed"
+                  : "bg-blue-600 hover:bg-blue-700 shadow-md hover:shadow-lg"
+              }`}
+            >
+              {isUploading ? "Subiendo..." : "Subir y Anexar"}
+            </button>
           </div>
-          
-          <button
-            type="submit"
-            disabled={isUploading || !file}
-            className={`px-8 py-4 rounded-xl text-sm font-bold text-white transition-all ${
-              isUploading || !file
-                ? "bg-slate-300 cursor-not-allowed"
-                : "bg-blue-600 hover:bg-blue-700 shadow-md hover:shadow-lg"
-            }`}
-          >
-            {isUploading ? "Subiendo..." : "Subir y Anexar"}
-          </button>
         </form>
 
         {uploadMessage.text && (

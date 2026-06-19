@@ -31,4 +31,7 @@ public class DocumentoEscaneado {
 
     @Column(name = "fecha_subida", nullable = false, updatable = false)
     private LocalDateTime fechaSubida = LocalDateTime.now();
+
+    @Column(name = "fecha_documento")
+    private java.time.LocalDate fechaDocumento;
 }

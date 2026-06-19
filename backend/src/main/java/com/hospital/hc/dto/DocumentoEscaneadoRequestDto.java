@@ -13,4 +13,5 @@ public class DocumentoEscaneadoRequestDto {
     private Long historiaClinicaId;
     private String nombreArchivo;
     private String urlArchivo;
+    private java.time.LocalDate fechaDocumento;
 }

@@ -247,7 +247,7 @@ const HistorialModal: React.FC<Props> = ({ cita, onClose }) => {
                         {doc.nombreArchivo}
                       </p>
                       <p className="text-[10px] font-semibold text-slate-400 mt-0.5">
-                        {new Date(doc.fechaSubida).toLocaleDateString("es-PE")} • Ver PDF
+                        {doc.fechaDocumento ? `Documento del: ${new Date(doc.fechaDocumento).toLocaleDateString("es-PE", { year: 'numeric', month: 'short', day: 'numeric' })}` : `Subido el: ${new Date(doc.fechaSubida).toLocaleDateString("es-PE")}`} • Ver PDF
                       </p>
                     </div>
                   </a>
