@@ -19,6 +19,7 @@ import TriajePage from "../pages/TriajePage";
 import ArchivoPage from "../pages/ArchivoPage";
 
 import MigracionHistoriasTest from "../../modules/archivo/MigracionHistoriasTest";
+import MobileCameraPage from "../pages/MobileCameraPage";
 
 const AppRouter: React.FC = () => {
   return (
@@ -27,6 +28,7 @@ const AppRouter: React.FC = () => {
       <Route path="/" element={<Login />} />
       <Route path="/login" element={<Login />} />
       <Route path="/recuperar-clave" element={<RecoverPassword />} />
+      <Route path="/mobile-upload/:sessionId" element={<MobileCameraPage />} />
 
       {/* Rutas Privadas Protegidas por Rol */}
       <Route element={<PlatformLayout />}>

@@ -1,4 +1,4 @@
-﻿package com.hospital.hc.services;
+package com.hospital.hc.services;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;

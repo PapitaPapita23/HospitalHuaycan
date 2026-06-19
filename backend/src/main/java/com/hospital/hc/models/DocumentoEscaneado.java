@@ -34,4 +34,10 @@ public class DocumentoEscaneado {
 
     @Column(name = "fecha_documento")
     private java.time.LocalDate fechaDocumento;
+
+    @Column(name = "tipo_documento")
+    private String tipoDocumento;
+
+    @Column(name = "texto_ocr", columnDefinition = "TEXT")
+    private String textoOcr;
 }

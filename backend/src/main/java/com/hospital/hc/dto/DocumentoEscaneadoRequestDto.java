@@ -14,4 +14,6 @@ public class DocumentoEscaneadoRequestDto {
     private String nombreArchivo;
     private String urlArchivo;
     private java.time.LocalDate fechaDocumento;
+    private String tipoDocumento;
+    private String textoOcr;
 }

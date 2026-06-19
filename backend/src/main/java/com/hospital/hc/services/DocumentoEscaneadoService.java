@@ -31,6 +31,8 @@ public class DocumentoEscaneadoService {
                 .urlArchivo(requestDto.getUrlArchivo())
                 .fechaSubida(java.time.LocalDateTime.now())
                 .fechaDocumento(requestDto.getFechaDocumento())
+                .tipoDocumento(requestDto.getTipoDocumento())
+                .textoOcr(requestDto.getTextoOcr())
                 .build();
 
         DocumentoEscaneado saved = documentoEscaneadoRepository.save(doc);
@@ -53,6 +55,8 @@ public class DocumentoEscaneadoService {
                 .urlArchivo(doc.getUrlArchivo())
                 .fechaSubida(doc.getFechaSubida())
                 .fechaDocumento(doc.getFechaDocumento())
+                .tipoDocumento(doc.getTipoDocumento())
+                .textoOcr(doc.getTextoOcr())
                 .build();
     }
 }
