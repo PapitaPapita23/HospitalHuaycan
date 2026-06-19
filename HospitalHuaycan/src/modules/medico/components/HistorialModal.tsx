@@ -194,6 +194,20 @@ function AtencionAccordion({ a, idx }: { a: AtencionPasada; idx: number }) {
 }
 
 const HistorialModal: React.FC<Props> = ({ cita, onClose }) => {
+  const [filterYear, setFilterYear] = useState<string>("");
+
+  const availableYears = Array.from(new Set(
+    cita.documentosEscaneados?.map((doc: any) => 
+      doc.fechaDocumento ? new Date(doc.fechaDocumento).getFullYear().toString() : new Date(doc.fechaSubida).getFullYear().toString()
+    ) || []
+  )).sort((a, b) => Number(b) - Number(a));
+
+  const filteredDocs = cita.documentosEscaneados?.filter((doc: any) => {
+    if (!filterYear) return true;
+    const year = doc.fechaDocumento ? new Date(doc.fechaDocumento).getFullYear().toString() : new Date(doc.fechaSubida).getFullYear().toString();
+    return year === filterYear;
+  });
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
@@ -226,33 +240,54 @@ const HistorialModal: React.FC<Props> = ({ cita, onClose }) => {
           {/* SECCIÓN DE DOCUMENTOS ANTIGUOS ESCANEADOS */}
           {cita.documentosEscaneados && cita.documentosEscaneados.length > 0 && (
             <div className="mb-6">
-              <h3 className="text-sm font-bold text-[#0A1733] mb-3 flex items-center gap-2">
-                <IoDocumentTextOutline className="w-5 h-5 text-blue-600" />
-                Documentos Históricos Escaneados
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {cita.documentosEscaneados.map((doc: any) => (
-                  <a
-                    key={doc.id}
-                    href={doc.urlArchivo}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-3 p-3 bg-white rounded-xl shadow-sm border border-slate-200 hover:border-blue-400 hover:shadow-md transition-all group"
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3 gap-2">
+                <h3 className="text-sm font-bold text-[#0A1733] flex items-center gap-2">
+                  <IoDocumentTextOutline className="w-5 h-5 text-blue-600" />
+                  Documentos Históricos Escaneados
+                </h3>
+                {availableYears.length > 0 && (
+                  <select
+                    value={filterYear}
+                    onChange={(e) => setFilterYear(e.target.value)}
+                    className="text-xs font-semibold bg-white border border-slate-200 text-slate-600 rounded-lg px-3 py-1.5 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-50 cursor-pointer shadow-sm hover:border-slate-300 transition-colors"
                   >
-                    <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center shrink-0 group-hover:bg-blue-100 transition-colors">
-                      <IoDocumentTextOutline className="w-5 h-5 text-blue-600" />
-                    </div>
-                    <div className="overflow-hidden">
-                      <p className="text-sm font-bold text-slate-800 truncate" title={doc.nombreArchivo}>
-                        {doc.nombreArchivo}
-                      </p>
-                      <p className="text-[10px] font-semibold text-slate-400 mt-0.5">
-                        {doc.fechaDocumento ? `Documento del: ${new Date(doc.fechaDocumento).toLocaleDateString("es-PE", { year: 'numeric', month: 'short', day: 'numeric' })}` : `Subido el: ${new Date(doc.fechaSubida).toLocaleDateString("es-PE")}`} • Ver PDF
-                      </p>
-                    </div>
-                  </a>
-                ))}
+                    <option value="">Todos los años</option>
+                    {availableYears.map(y => (
+                      <option key={String(y)} value={String(y)}>{String(y)}</option>
+                    ))}
+                  </select>
+                )}
               </div>
+              
+              {filteredDocs && filteredDocs.length === 0 ? (
+                <div className="text-center py-4 text-xs font-medium text-slate-400 bg-white rounded-xl border border-dashed border-slate-200">
+                  No hay documentos subidos para el año {filterYear}.
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {filteredDocs?.map((doc: any) => (
+                    <a
+                      key={doc.id}
+                      href={doc.urlArchivo}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-3 p-3 bg-white rounded-xl shadow-sm border border-slate-200 hover:border-blue-400 hover:shadow-md transition-all group"
+                    >
+                      <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center shrink-0 group-hover:bg-blue-100 transition-colors">
+                        <IoDocumentTextOutline className="w-5 h-5 text-blue-600" />
+                      </div>
+                      <div className="overflow-hidden">
+                        <p className="text-sm font-bold text-slate-800 truncate" title={doc.nombreArchivo}>
+                          {doc.nombreArchivo}
+                        </p>
+                        <p className="text-[10px] font-semibold text-slate-400 mt-0.5">
+                          {doc.fechaDocumento ? `Documento del: ${new Date(doc.fechaDocumento).toLocaleDateString("es-PE", { year: 'numeric', month: 'short', day: 'numeric' })}` : `Subido el: ${new Date(doc.fechaSubida).toLocaleDateString("es-PE")}`} • Ver PDF
+                        </p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 
