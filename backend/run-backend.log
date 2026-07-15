@@ -1,0 +1,63 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------------< com.hospital:hc >---------------------------
+[INFO] Building hospital-hc 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.3.5:run (default-cli) > test-compile @ hc >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ hc ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ hc ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ hc ---
+[INFO] skip non existing resourceDirectory C:\Users\sebas\HospitalHuaycan\backend\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ hc ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] <<< spring-boot:3.3.5:run (default-cli) < test-compile @ hc <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.3.5:run (default-cli) @ hc ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.5)
+
+2026-07-14T23:39:16.254-05:00  INFO 25828 --- [           main] com.hospital.hc.HcApplication            : Starting HcApplication using Java 21.0.7 with PID 25828 (C:\Users\sebas\HospitalHuaycan\backend\target\classes started by sebas in C:\Users\sebas\HospitalHuaycan\backend)
+2026-07-14T23:39:16.255-05:00  INFO 25828 --- [           main] com.hospital.hc.HcApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-07-14T23:39:16.771-05:00  INFO 25828 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-14T23:39:16.837-05:00  INFO 25828 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 60 ms. Found 11 JPA repository interfaces.
+2026-07-14T23:39:17.263-05:00  INFO 25828 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-07-14T23:39:17.274-05:00  INFO 25828 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-14T23:39:17.274-05:00  INFO 25828 --- [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.31]
+2026-07-14T23:39:17.315-05:00  INFO 25828 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-07-14T23:39:17.316-05:00  INFO 25828 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1030 ms
+2026-07-14T23:39:17.426-05:00  INFO 25828 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-07-14T23:39:17.461-05:00  INFO 25828 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-07-14T23:39:17.484-05:00  INFO 25828 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-07-14T23:39:17.694-05:00  INFO 25828 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-14T23:39:17.716-05:00  WARN 25828 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-07-14T23:39:18.537-05:00  INFO 25828 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-14T23:39:18.539-05:00  INFO 25828 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-14T23:39:18.849-05:00  INFO 25828 --- [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-14T23:39:19.477-05:00  INFO 25828 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userDetailsServiceImpl
+2026-07-14T23:39:19.761-05:00  INFO 25828 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-07-14T23:39:19.766-05:00  INFO 25828 --- [           main] com.hospital.hc.HcApplication            : Started HcApplication in 3.803 seconds (process running for 4.053)
+2026-07-14T23:39:19.841-05:00  INFO 25828 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-14T23:39:21.090-05:00  INFO 25828 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6a4b956f
+2026-07-14T23:39:21.091-05:00  INFO 25828 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-14T23:39:31.189-05:00  INFO 25828 --- [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-14T23:39:31.189-05:00  INFO 25828 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-07-14T23:39:31.190-05:00  INFO 25828 --- [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms

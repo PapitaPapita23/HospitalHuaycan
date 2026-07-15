@@ -11,11 +11,7 @@ const Login: React.FC = () => {
 
   useEffect(() => {
     if (isAuthenticated && userRole) {
-      if (userRole === "ROLE_ADMISION") navigate("/admision", { replace: true });
-      else if (userRole === "ROLE_MEDICO") navigate("/medico", { replace: true });
-      else if (userRole === "ROLE_ENFERMERIA") navigate("/triaje", { replace: true });
-      else if (userRole === "ROLE_ARCHIVO") navigate("/archivo", { replace: true });
-      else navigate("/home", { replace: true });
+      navigate("/home", { replace: true });
     }
   }, [isAuthenticated, userRole, navigate]);
 

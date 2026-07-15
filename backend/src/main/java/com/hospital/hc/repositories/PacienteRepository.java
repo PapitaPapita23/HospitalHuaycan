@@ -8,4 +8,5 @@ import java.util.Optional;
 @Repository
 public interface PacienteRepository extends JpaRepository<Paciente, Long> {
     Optional<Paciente> findByDni(String dni);
+    long countByActivoTrue();
 }

@@ -4,9 +4,12 @@ import com.hospital.hc.models.DocumentoEscaneado;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
 public interface DocumentoEscaneadoRepository extends JpaRepository<DocumentoEscaneado, Long> {
     List<DocumentoEscaneado> findByHistoriaClinicaIdOrderByFechaSubidaDesc(Long historiaClinicaId);
+    long countByFechaSubidaBetween(LocalDateTime desde, LocalDateTime hasta);
+    List<DocumentoEscaneado> findByFechaSubidaBetween(LocalDateTime desde, LocalDateTime hasta);
 }

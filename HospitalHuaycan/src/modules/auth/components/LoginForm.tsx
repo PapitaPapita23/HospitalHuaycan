@@ -57,18 +57,7 @@ const LoginForm: React.FC = () => {
       setLoading(true);
       try {
         await handleLogin(email, password);
-        const rol = localStorage.getItem("rol");
-        if (rol === "ROLE_ADMISION") {
-          navigate("/admision");
-        } else if (rol === "ROLE_MEDICO") {
-          navigate("/medico");
-        } else if (rol === "ROLE_ENFERMERIA") {
-          navigate("/triaje");
-        } else if (rol === "ROLE_ARCHIVO") {
-          navigate("/archivo");
-        } else {
-          navigate("/home");
-        }
+        navigate("/home");
       } catch (error: any) {
         console.error("Error en login:", error);
         setErrors({
