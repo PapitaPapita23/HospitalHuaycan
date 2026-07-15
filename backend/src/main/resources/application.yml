@@ -25,7 +25,8 @@ spring:
       max-request-size: 50MB
 
 server:
-  port: 8080
+  port: ${PORT:8080}
+
   tomcat:
     max-http-form-post-size: 50MB
   servlet:
