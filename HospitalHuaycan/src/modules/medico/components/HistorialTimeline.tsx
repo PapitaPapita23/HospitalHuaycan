@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react";
 import {
   IoCalendarOutline, IoMedicalOutline, IoFlaskOutline,
   IoHeartHalfOutline, IoDocumentTextOutline, IoAlertCircleOutline,
-  IoMedkitOutline,
+  IoMedkitOutline, IoPrintOutline,
 } from "react-icons/io5";
 import { AtencionPasada } from "../types";
 import { obtenerHistorial } from "../services/atencionService";
+import { printReceta } from "../utils/printReceta";
 
 interface Props {
   historiaClinicaId: number;
+  pacienteNombres?: string;
+  pacienteDni?: string;
+  citaId?: number;
 }
 
 function parseSecondaryDiagnostics(val: string | null | undefined): string[] {
@@ -25,10 +29,30 @@ function parseSecondaryDiagnostics(val: string | null | undefined): string[] {
   return [];
 }
 
-const HistorialTimeline: React.FC<Props> = ({ historiaClinicaId }) => {
+const HistorialTimeline: React.FC<Props> = ({
+  historiaClinicaId,
+  pacienteNombres,
+  pacienteDni,
+  citaId
+}) => {
   const [history, setHistory] = useState<AtencionPasada[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const handlePrint = (item: AtencionPasada) => {
+    printReceta({
+      pacienteNombres: pacienteNombres || "Paciente",
+      pacienteDni: pacienteDni || "",
+      citaId: citaId || 0,
+      diagnosticoPrincipalCodigo: item.diagnosticoCie10Principal || undefined,
+      diagnosticoPrincipalDescripcion: item.diagnosticoDescripcion || undefined,
+      diagnosticosSecundarios: item.diagnosticosSecundarios || undefined,
+      medicamentos: item.recetas || [],
+      tratamiento: item.tratamiento || undefined,
+      indicaciones: item.indicaciones || undefined,
+      fechaAtencion: item.fechaAtencion
+    });
+  };
 
   useEffect(() => {
     async function loadHistory() {
@@ -187,7 +211,17 @@ const HistorialTimeline: React.FC<Props> = ({ historiaClinicaId }) => {
                   <div className="flex gap-2.5 bg-emerald-50/15 p-3.5 rounded-xl border border-emerald-100/30">
                     <IoMedkitOutline className="w-4.5 h-4.5 text-emerald-600 shrink-0 mt-0.5" />
                     <div className="w-full">
-                      <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-2">Receta Médica (Medicamentos)</p>
+                      <div className="flex items-center justify-between mb-2">
+                        <p className="text-[9px] font-bold uppercase tracking-wider text-slate-400 mb-0">Receta Médica (Medicamentos)</p>
+                        <button
+                          type="button"
+                          onClick={() => handlePrint(item)}
+                          className="flex items-center gap-1 px-2 py-0.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[9px] rounded transition-all shadow-sm cursor-pointer"
+                        >
+                          <IoPrintOutline className="w-2.5 h-2.5" />
+                          Imprimir / PDF
+                        </button>
+                      </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {item.recetas.map((rec, rIdx) => (
                           <div key={rIdx} className="bg-white border border-slate-100 rounded-lg p-2.5 shadow-sm flex flex-col justify-between">

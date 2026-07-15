@@ -66,7 +66,12 @@ const MedicoPage: React.FC = () => {
             </div>
             <div className="max-h-[720px] overflow-y-auto pr-1">
               {activeConsulta.historiaClinicaId ? (
-                <HistorialTimeline historiaClinicaId={activeConsulta.historiaClinicaId} />
+                <HistorialTimeline
+                  historiaClinicaId={activeConsulta.historiaClinicaId}
+                  pacienteNombres={activeConsulta.pacienteNombres}
+                  pacienteDni={activeConsulta.pacienteDni}
+                  citaId={activeConsulta.citaId}
+                />
               ) : (
                 <div className="text-center py-6 text-slate-400 text-xs italic">
                   Sin historia clínica asociada

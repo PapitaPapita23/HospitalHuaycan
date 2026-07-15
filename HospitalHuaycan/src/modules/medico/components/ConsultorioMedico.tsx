@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import {
   IoPulseOutline, IoChevronDownOutline, IoAlertCircleOutline,
   IoCheckmarkCircleOutline, IoTrashOutline, IoAddOutline,
-  IoMedicalOutline, IoCloseCircleOutline, IoBookOutline
+  IoMedicalOutline, IoCloseCircleOutline, IoBookOutline,
+  IoPrintOutline
 } from "react-icons/io5";
 import { CitaMedico } from "../types";
 import { registrarConsulta, buscarCie10, Cie10Diagnostico, MedicamentoReceta, ConsultaRequest } from "../services/atencionService";
+import { printReceta } from "../utils/printReceta";
 
 interface Props {
   cita: CitaMedico;
@@ -128,6 +130,20 @@ const ConsultorioMedico: React.FC<Props> = ({ cita, onSuccess, onCancel }) => {
 
   const handleRemoveMedicamento = (index: number) => {
     setMedicamentos(medicamentos.filter((_, i) => i !== index));
+  };
+
+  const handlePrint = () => {
+    printReceta({
+      pacienteNombres: cita.pacienteNombres,
+      pacienteDni: cita.pacienteDni,
+      citaId: cita.citaId,
+      diagnosticoPrincipalCodigo: diagnosticoCie10Principal || undefined,
+      diagnosticoPrincipalDescripcion: principalDesc || undefined,
+      diagnosticosSecundarios: diagnosticosSecundarios,
+      medicamentos: medicamentos,
+      tratamiento: tratamiento || undefined,
+      indicaciones: indicaciones || undefined
+    });
   };
 
   const validate = (): boolean => {
@@ -405,10 +421,22 @@ const ConsultorioMedico: React.FC<Props> = ({ cita, onSuccess, onCancel }) => {
 
         {/* 4. Módulo de Receta Médica Dinámica */}
         <div className="bg-blue-50/20 p-5 rounded-2xl border border-blue-100/40">
-          <h4 className="text-xs font-bold uppercase tracking-wider text-blue-800 mb-4 flex items-center gap-1.5">
-            <IoMedicalOutline className="w-4 h-4 text-blue-600" />
-            Receta Médica Digital
-          </h4>
+          <div className="flex items-center justify-between mb-4">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-blue-800 flex items-center gap-1.5 mb-0">
+              <IoMedicalOutline className="w-4 h-4 text-blue-600" />
+              Receta Médica Digital
+            </h4>
+            {medicamentos.length > 0 && (
+              <button
+                type="button"
+                onClick={handlePrint}
+                className="flex items-center gap-1.5 px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-all shadow-sm hover:shadow-md cursor-pointer"
+              >
+                <IoPrintOutline className="w-4 h-4" />
+                Imprimir Receta / PDF
+              </button>
+            )}
+          </div>
 
           {/* Formulario Agregar Medicamento */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4 bg-white p-4 rounded-xl border border-slate-100">
@@ -545,19 +573,29 @@ const ConsultorioMedico: React.FC<Props> = ({ cita, onSuccess, onCancel }) => {
         </div>
 
         {/* Botones de Envío */}
-        <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
+        <div className="flex justify-end items-center gap-3 pt-4 border-t border-slate-100">
+          {medicamentos.length > 0 && (
+            <button
+              type="button"
+              onClick={handlePrint}
+              className="mr-auto flex items-center gap-1.5 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-all shadow-md hover:shadow-lg cursor-pointer"
+            >
+              <IoPrintOutline className="w-4 h-4" />
+              Imprimir Receta (PDF)
+            </button>
+          )}
           <button
             type="button"
             onClick={onCancel}
             disabled={isSubmitting}
-            className="px-5 py-2.5 text-slate-500 hover:bg-slate-100 font-bold text-sm rounded-xl transition-all disabled:opacity-50"
+            className="px-5 py-2.5 text-slate-500 hover:bg-slate-100 font-bold text-sm rounded-xl transition-all disabled:opacity-50 cursor-pointer"
           >
             Cancelar
           </button>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="flex items-center gap-1.5 px-6 py-2.5 bg-[#0A1733] hover:bg-[#CA0000] text-white font-bold text-sm rounded-xl transition-all shadow-md hover:shadow-lg disabled:opacity-50"
+            className="flex items-center gap-1.5 px-6 py-2.5 bg-[#0A1733] hover:bg-[#CA0000] text-white font-bold text-sm rounded-xl transition-all shadow-md hover:shadow-lg disabled:opacity-50 cursor-pointer"
           >
             {isSubmitting ? (
               <>

@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import {
   IoCloseOutline, IoChevronDownOutline, IoHeartOutline,
   IoDocumentTextOutline, IoMedkitOutline, IoFlaskOutline,
+  IoPrintOutline,
 } from "react-icons/io5";
 import { CitaMedico, AtencionPasada } from "../types";
+import { printReceta } from "../utils/printReceta";
 
 interface Props {
   cita: CitaMedico;
@@ -50,9 +52,36 @@ const Section = ({ title, content, icon }: { title: string; content?: string | n
     </div>
   ) : null;
 
-function AtencionAccordion({ a, idx }: { a: AtencionPasada; idx: number }) {
+function AtencionAccordion({
+  a,
+  idx,
+  pacienteNombres,
+  pacienteDni,
+  citaId
+}: {
+  a: AtencionPasada;
+  idx: number;
+  pacienteNombres: string;
+  pacienteDni: string;
+  citaId: number;
+}) {
   const [open, setOpen] = useState(idx === 0);
   const secundariosStr = toSafeString(a.diagnosticosSecundarios);
+
+  const handlePrint = () => {
+    printReceta({
+      pacienteNombres,
+      pacienteDni,
+      citaId,
+      diagnosticoPrincipalCodigo: a.diagnosticoCie10Principal || undefined,
+      diagnosticoPrincipalDescripcion: a.diagnosticoDescripcion || undefined,
+      diagnosticosSecundarios: a.diagnosticosSecundarios || undefined,
+      medicamentos: a.recetas || [],
+      tratamiento: a.tratamiento || undefined,
+      indicaciones: a.indicaciones || undefined,
+      fechaAtencion: a.fechaAtencion
+    });
+  };
 
   return (
     <div className="border border-slate-100 rounded-2xl overflow-hidden">
@@ -153,9 +182,19 @@ function AtencionAccordion({ a, idx }: { a: AtencionPasada; idx: number }) {
           {/* Receta Médica */}
           {a.recetas && a.recetas.length > 0 && (
             <div className="pt-3 border-t border-slate-50">
-              <div className="flex items-center gap-1.5 mb-2">
-                <IoMedkitOutline className="w-3.5 h-3.5 text-emerald-600" />
-                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Receta Médica</p>
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-1.5">
+                  <IoMedkitOutline className="w-3.5 h-3.5 text-emerald-600" />
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Receta Médica</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={handlePrint}
+                  className="flex items-center gap-1 px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[10px] rounded-lg transition-all shadow-sm cursor-pointer"
+                >
+                  <IoPrintOutline className="w-3 h-3" />
+                  Imprimir / PDF
+                </button>
               </div>
               <div className="bg-emerald-50/10 border border-emerald-100/30 rounded-xl p-3.5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -302,7 +341,14 @@ const HistorialModal: React.FC<Props> = ({ cita, onClose }) => {
             </div>
           ) : (
             cita.historialConsultas.map((a, i) => (
-              <AtencionAccordion key={i} a={a} idx={i} />
+              <AtencionAccordion
+                key={i}
+                a={a}
+                idx={i}
+                pacienteNombres={cita.pacienteNombres}
+                pacienteDni={cita.pacienteDni}
+                citaId={cita.citaId}
+              />
             ))
           )}
         </div>
