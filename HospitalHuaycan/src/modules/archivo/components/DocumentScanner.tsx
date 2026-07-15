@@ -14,7 +14,7 @@ import {
   IoTrashOutline
 } from "react-icons/io5";
 import { supabase } from "../../../lib/supabase";
-import { apiPost } from "../../../lib/apiClient";
+import { apiPost, BASE_URL } from "../../../lib/apiClient";
 
 interface Props {
   historiaClinicaId: number;
@@ -67,7 +67,7 @@ const DocumentScanner: React.FC<Props> = ({ historiaClinicaId }) => {
     if (tab === "celular") {
       interval = setInterval(async () => {
         try {
-          const res = await fetch(`/api/mobile-sync/${sessionId}`);
+          const res = await fetch(`${BASE_URL}/mobile-sync/${sessionId}`);
           if (res.ok) {
             const data = await res.json();
             if (data.images && data.images.length > mobileImages.length) {
@@ -86,7 +86,7 @@ const DocumentScanner: React.FC<Props> = ({ historiaClinicaId }) => {
   // Limpiar sesión al desmontar
   useEffect(() => {
     return () => {
-      fetch(`/api/mobile-sync/${sessionId}`, { method: "DELETE" }).catch(() => {});
+      fetch(`${BASE_URL}/mobile-sync/${sessionId}`, { method: "DELETE" }).catch(() => {});
     };
   }, [sessionId]);
 
@@ -144,7 +144,7 @@ const DocumentScanner: React.FC<Props> = ({ historiaClinicaId }) => {
     setMobileImages([]);
     setOcrTexts([]);
     setOcrStatus("idle");
-    fetch(`/api/mobile-sync/${sessionId}`, { method: "DELETE" }).catch(() => {});
+    fetch(`${BASE_URL}/mobile-sync/${sessionId}`, { method: "DELETE" }).catch(() => {});
   };
 
   // ── OCR Secuencial ────────────────────────────────────────────────────────
@@ -162,7 +162,7 @@ const DocumentScanner: React.FC<Props> = ({ historiaClinicaId }) => {
         const baseProgress = (i / images.length) * 100;
         setOcrProgress(baseProgress + 10);
 
-        const res = await fetch(`/api/ocr`, {
+        const res = await fetch(`${BASE_URL}/ocr`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ image: images[i] }),
