@@ -1,0 +1,4 @@
+target/
+*.log
+*.sql
+.mvn/wrapper/maven-wrapper.jar

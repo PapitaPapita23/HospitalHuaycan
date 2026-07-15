@@ -1,6 +1,6 @@
 import { supabase } from "../../../lib/supabase";
 import { PacienteDTO, Especialidad, Medico, CitaResponseDTO, PatientState, AppointmentItem, SearchPatientResponse } from "../types";
-import { apiGet } from "../../../lib/apiClient";
+import { apiGet, BASE_URL } from "../../../lib/apiClient";
 
 const APIPERU_TOKEN = "20518|1ia6QkKYXDVnUyThYTD4mG2hd0fWa4Pez9XMQS5N1ea6cb98";
 
@@ -68,7 +68,7 @@ export async function searchPatientByDni(dni: string): Promise<SearchPatientResp
 
   // Paso 2: Intentar con el backend local de Spring Boot
   try {
-    const response = await fetch(`http://localhost:8080/api/pacientes/buscar?dni=${dni}`);
+    const response = await fetch(`${BASE_URL}/pacientes/buscar?dni=${dni}`);
     if (response.ok) {
       const p = await response.json();
       
