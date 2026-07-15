@@ -2,7 +2,7 @@ import { supabase } from "../../../lib/supabase";
 import { PacienteDTO, Especialidad, Medico, CitaResponseDTO, PatientState, AppointmentItem, SearchPatientResponse } from "../types";
 import { apiGet } from "../../../lib/apiClient";
 
-const APIPERU_TOKEN = "18155|w1r35b4TmjwlS8M8K8ephJs2TISPlIjyRcXGxRteb0bf321a";
+const APIPERU_TOKEN = "20518|1ia6QkKYXDVnUyThYTD4mG2hd0fWa4Pez9XMQS5N1ea6cb98";
 
 
 /**
