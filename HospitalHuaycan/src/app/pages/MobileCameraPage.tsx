@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { IoCameraOutline, IoCheckmarkCircleOutline, IoRefreshOutline, IoAddCircleOutline, IoPaperPlaneOutline } from "react-icons/io5";
+import { BASE_URL } from "../../lib/apiClient";
 
 const MobileCameraPage: React.FC = () => {
   const { sessionId } = useParams<{ sessionId: string }>();
@@ -53,8 +54,7 @@ const MobileCameraPage: React.FC = () => {
     setIsSending(true);
     
     try {
-      const apiUrl = `/api`;
-      const res = await fetch(`${apiUrl}/mobile-sync/${sessionId}`, {
+      const res = await fetch(`${BASE_URL}/mobile-sync/${sessionId}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ image: photo })
