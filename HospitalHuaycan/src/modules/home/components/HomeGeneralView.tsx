@@ -12,6 +12,8 @@ import EstadoConsultaChart from "./EstadoConsultaChart";
 import TriajeInicioResumen from "./TriajeInicioResumen";
 import AdmisionInicioResumen from "./AdmisionInicioResumen";
 import ArchivoInicioResumen from "./ArchivoInicioResumen";
+import TurnoDonut from "./TurnoDonut";
+import TipoDocumentoDonut from "./TipoDocumentoDonut";
 
 interface HomeGeneralViewProps {
   userRole: string | null;
@@ -33,7 +35,18 @@ export default function HomeGeneralView({ userRole }: HomeGeneralViewProps) {
     content = resumen && (
       <div className="space-y-4">
         <TriajeInicioResumen resumen={resumen} />
-        <EstadoConsultaChart data={resumen.atencionesPorEstadoConsultaHoy} fechaLabel="hoy" />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <TurnoDonut data={resumen.citasPorTurnoHoy} fechaLabel="hoy" />
+          <EstadoConsultaChart data={resumen.atencionesPorEstadoConsultaHoy} fechaLabel="hoy" />
+        </div>
+        <TendenciaChart
+          data={resumen.citasUltimos7Dias}
+          title="Demanda de citas"
+          subtitle="Últimos 7 días"
+          color="#1baf7a"
+          tooltipLabel="Citas"
+          emptyMessage="Aún no hay citas en los últimos 7 días"
+        />
       </div>
     );
   } else if (userRole === "ROLE_ADMISION") {
@@ -42,8 +55,17 @@ export default function HomeGeneralView({ userRole }: HomeGeneralViewProps) {
       <div className="space-y-4">
         <AdmisionInicioResumen resumen={resumen} />
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <TurnoDonut data={resumen.citasPorTurnoHoy} fechaLabel="hoy" />
           <EspecialidadBarChart data={resumen.topEspecialidadesHoy} fechaLabel="hoy" />
           <EstadoCitasChart data={resumen.citasPorEstadoHoy} fechaLabel="hoy" />
+          <TendenciaChart
+            data={resumen.citasUltimos7Dias}
+            title="Tendencia de citas"
+            subtitle="Últimos 7 días"
+            color="#2a78d6"
+            tooltipLabel="Citas"
+            emptyMessage="Aún no hay citas en los últimos 7 días"
+          />
         </div>
       </div>
     );
@@ -52,14 +74,25 @@ export default function HomeGeneralView({ userRole }: HomeGeneralViewProps) {
     content = resumen && (
       <div className="space-y-4">
         <ArchivoInicioResumen resumen={resumen} />
-        <TendenciaChart
-          data={resumen.documentosUltimos7Dias}
-          title="Documentos digitalizados"
-          subtitle="Últimos 7 días"
-          color="#1baf7a"
-          tooltipLabel="Documentos"
-          emptyMessage="Aún no hay documentos escaneados en los últimos 7 días"
-        />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <TipoDocumentoDonut />
+          <TendenciaChart
+            data={resumen.documentosUltimos7Dias}
+            title="Documentos digitalizados"
+            subtitle="Últimos 7 días"
+            color="#1baf7a"
+            tooltipLabel="Documentos"
+            emptyMessage="Aún no hay documentos escaneados en los últimos 7 días"
+          />
+          <div className="lg:col-span-2">
+            <EspecialidadBarChart
+              data={resumen.topEspecialidadesHoy}
+              fechaLabel="hoy"
+              title="Expedientes por especialidad · hoy"
+              subtitle="Citas de hoy que requieren historia clínica"
+            />
+          </div>
+        </div>
       </div>
     );
   } else {

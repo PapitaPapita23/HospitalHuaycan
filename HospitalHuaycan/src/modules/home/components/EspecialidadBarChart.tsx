@@ -5,15 +5,17 @@ import ChartCard from "./ChartCard";
 interface EspecialidadBarChartProps {
   data: ConteoItem[];
   fechaLabel: string;
+  title?: string;
+  subtitle?: string;
 }
 
 const COLOR = "#2a78d6";
 
-export default function EspecialidadBarChart({ data, fechaLabel }: EspecialidadBarChartProps) {
+export default function EspecialidadBarChart({ data, fechaLabel, title, subtitle }: EspecialidadBarChartProps) {
   return (
     <ChartCard
-      title={`Especialidades · ${fechaLabel}`}
-      subtitle="Top 5 con más citas"
+      title={title ?? `Especialidades · ${fechaLabel}`}
+      subtitle={subtitle ?? "Top 5 con más citas"}
       isEmpty={data.length === 0}
       emptyMessage="No hay citas registradas para esta fecha"
     >
