@@ -201,3 +201,29 @@ graph TD
 *   **Solución:**
     *   **En Local (Vite):** El servidor dev lo gestiona por defecto.
     *   **En Vercel:** Asegúrese de tener el archivo [vercel.json](file:///c:/Users/draco/OneDrive/Escritorio/Huaycan-Hospital/HospitalHuaycan/vercel.json) configurado con los rewrites hacia el `index.html`.
+
+---
+
+## 7. Integración Continua (CI)
+
+El proyecto cuenta con un flujo de trabajo automático (Workflow) configurado en GitHub Actions para asegurar la calidad del código antes de integrarse a la rama principal.
+
+### Flujo de Trabajo: `Integración Continua (CI)`
+Este flujo se dispara automáticamente cada vez que se realiza un `push` o un `pull request` hacia la rama `main`. 
+
+El proceso está dividido en dos trabajos que se ejecutan en paralelo:
+
+1. **Construir Frontend (`frontend`)**:
+   - Utiliza **Node.js 20**.
+   - Ingresa a la carpeta `HospitalHuaycan`.
+   - Descarga las dependencias del proyecto usando `npm ci` para instalaciones limpias y reproducibles, apoyándose en el caché de GitHub para mayor velocidad.
+   - Ejecuta el linter (`npm run lint`) para validar buenas prácticas y detectar posibles errores en el código React.
+   - Ejecuta el build (`npm run build`) para garantizar que la aplicación puede empaquetarse correctamente para producción.
+
+2. **Construir Backend (`backend`)**:
+   - Utiliza **Java 17 (Temurin)**.
+   - Ingresa a la carpeta `backend`.
+   - Utiliza la caché de dependencias de Maven para acelerar el proceso.
+   - Ejecuta la compilación y empaquetado del proyecto (`mvn clean package -DskipTests`). Por defecto las pruebas se omiten en CI para evitar fallos por falta de conexión a una base de datos local en el entorno de GitHub Actions.
+
+Este pipeline garantiza que el código subido al repositorio principal está libre de errores de sintaxis y es capaz de compilar correctamente tanto en el frontend como en el backend.

@@ -53,5 +53,5 @@ jobs:
           cache: 'maven'
 
       - name: Construir con Maven
-        # Se omiten las pruebas inicialmente para evitar fallos si se requiere una base de datos.
+       
         run: mvn clean package -DskipTests
