@@ -1,4 +1,4 @@
-import React from "react";
+
 import CitaForm from "../../modules/admision/components/CitaForm";
 import { IoCalendarOutline } from "react-icons/io5";
 

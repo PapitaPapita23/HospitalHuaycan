@@ -59,6 +59,7 @@ export default function CalendarPage() {
   }, [fecha]);
 
   useEffect(() => {
+    // eslint-disable-next-line
     load();
   }, [load]);
 
